@@ -1,0 +1,50 @@
+{
+    "look and feel": {
+        "primary-palette": [
+            "Red",
+            "Pink",
+            "Purple",
+            "DeepPurple",
+            "Indigo",
+            "Blue",
+            "LightBlue",
+            "Cyan",
+            "Teal",
+            "Green",
+            "LightGreen",
+            "Lime",
+            "Yellow",
+            "Amber",
+            "Orange",
+            "DeepOrange",
+            "Brown",
+            "Gray",
+            "BlueGray"
+        ],
+        "accent-palette": [
+            "Red",
+            "Pink",
+            "Purple",
+            "DeepPurple",
+            "Indigo",
+            "Blue",
+            "LightBlue",
+            "Cyan",
+            "Teal",
+            "Green",
+            "LightGreen",
+            "Lime",
+            "Yellow",
+            "Amber",
+            "Orange",
+            "DeepOrange",
+            "Brown",
+            "Gray",
+            "BlueGray"
+        ],
+        "theme": [
+            "Light",
+            "Dark"
+        ]
+    }
+}

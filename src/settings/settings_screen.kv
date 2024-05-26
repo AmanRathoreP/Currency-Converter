@@ -1,9 +1,9 @@
-<homeScreen>:
+<settingsScreen>:
     MDTopAppBar:
-        title: "Home Screen of Currency Converter"
+        title: "Settings of Currency Converter"
         pos_hint: {"top": 1}
         elevation: 0
-        right_action_items: [["assets/icons/settings.png", lambda x: app.navigate_to_settings()]]
+        left_action_items: [["assets/icons/left-arrow.png", lambda x: app.navigate_to_home()]]
 
     MDBoxLayout:
         orientation: 'vertical'
@@ -16,10 +16,11 @@
             font_size : 300
 
         MDLabel:
-            text: "Home Screen of Currency Converter"
+            text: "Settings Screen of Currency Converter"
             halign: 'center'
             font_size: 44
 
         MDRaisedButton:
-            text: "Click Me"
+            text: "Toggle Theme"
             pos_hint: {"center_x": 0.5}
+            on_press: root.toggle_theme()

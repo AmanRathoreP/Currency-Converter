@@ -191,3 +191,4 @@ pyrightconfig.json
 
 .VSCodeCounter/*
 python_virtual_environment_for_app/*
+*.ini
