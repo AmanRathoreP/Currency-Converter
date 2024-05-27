@@ -11,11 +11,11 @@ kivy_design_files = ["settings_screen"]
 for kv_file in kivy_design_files:
     Builder.load_file(os.path.join(os.path.abspath(os.getcwd()), "src", "settings", kv_file + ".kv"))
 
-class settingsScreen(MDScreen):
+class settingsDefaultScreen(MDScreen):
     def __init__(self, config: ConfigParser, **kwargs):
-        super(settingsScreen, self).__init__(**kwargs)
+        super(settingsDefaultScreen, self).__init__(**kwargs)
         self.config = config
-    
+
     def toggle_theme(self):
         self.config["look and feel"]["theme"] = "Dark" if self.config["look and feel"]["theme"] == "Light" else "Light"
         self.config.write()

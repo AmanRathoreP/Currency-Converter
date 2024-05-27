@@ -13,7 +13,7 @@ Config.set('graphics', 'width', str(int(sizes[current_size][0]*size_multiplier))
 Config.set('graphics', 'height', str(int(sizes[current_size][1]*size_multiplier)))
 
 from src.home.home import homeScreen
-from src.settings.settings_screen import settingsScreen
+from src.settings.settings import settingsScreen
 
 import json
 
@@ -35,8 +35,10 @@ class currencyApp(MDApp):
 
 	def build(self):
 		self.screen_manager = ScreenManager()
-		self.screen_manager.add_widget(homeScreen(self.config, name = "home"))
-		self.screen_manager.add_widget(settingsScreen(self.config, name = "settings"))
+		self.home = homeScreen(self.config, name = "home")
+		self.settings = settingsScreen(self.config, name = "settings")
+		self.screen_manager.add_widget(self.home)
+		self.screen_manager.add_widget(self.settings)
 		return self.screen_manager
 	
 	def build_config(self, config):

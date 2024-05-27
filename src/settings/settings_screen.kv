@@ -1,4 +1,4 @@
-<settingsScreen>:
+<settingsDefaultScreen>:
     orientation: "vertical"
 
     MDTopAppBar:
@@ -6,7 +6,7 @@
         title: "Settings"
         pos_hint: {"top": 1}
         elevation: 0
-        left_action_items: [["assets/icons/left-arrow.png", lambda x: app.navigate_to_home()]]
+        left_action_items: [["arrow-left-bold", lambda x: app.navigate_to_home()]]
 
     MDFloatLayout:
         id: settings_content
@@ -42,6 +42,7 @@
             pos_hint: {"top": (root.height - (settings_search.height + dp(10)))/root.height}
 
             MDBoxLayout:
+                id: sub_settings_list
                 orientation: "vertical"
                 size_hint_y: None
                 height: self.minimum_height
@@ -50,22 +51,27 @@
                     icon: "cash-sync"
                     text: "Currency"
                     subtext: "todo"
+                    on_release: app.settings.screen_manager.current = "Currency"
                 SettingsItem:
                     icon: "format-text"
                     text: "Format Currency Values"
                     subtext: "todo"
+                    on_release: app.settings.screen_manager.current = "Format Currency Values"
                 SettingsItem:
                     icon: "invert-colors"
                     text: "Look & Feel"
                     subtext: "todo"
+                    on_release: app.settings.screen_manager.current = "Look & Feel"
                 SettingsItem:
                     icon: "sync"
                     text: "Synchronisation"
                     subtext: "todo"
+                    on_release: app.settings.screen_manager.current = "Synchronisation"
                 SettingsItem:
                     icon: "information-variant-circle"
                     text: "About"
                     subtext: "todo"
+                    on_release: app.settings.screen_manager.current = "About"
 
     MDRaisedButton:
         text: "Toggle Theme"

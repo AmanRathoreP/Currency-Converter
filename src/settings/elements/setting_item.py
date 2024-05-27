@@ -1,3 +1,5 @@
+# from src.settings.elements.settings_panel import SettingsPanel
+
 import os
 
 from kivy.lang import Builder
