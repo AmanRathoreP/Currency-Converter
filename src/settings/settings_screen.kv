@@ -1,26 +1,73 @@
 <settingsScreen>:
+    orientation: "vertical"
+
     MDTopAppBar:
-        title: "Settings of Currency Converter"
+        id: settings_top_bar
+        title: "Settings"
         pos_hint: {"top": 1}
         elevation: 0
         left_action_items: [["assets/icons/left-arrow.png", lambda x: app.navigate_to_home()]]
 
-    MDBoxLayout:
-        orientation: 'vertical'
-        padding: 20
-        spacing: 20
+    MDFloatLayout:
+        id: settings_content
+        size_hint: None, None
+        height: root.height - settings_top_bar.height
+        width: root.width
 
-        MDIcon:
-            icon:"assets/icons/work-in-progress.png"
-            pos_hint: {"center_x": 0.5, "center_y": 0.1}
-            font_size : 300
+        MDBoxLayout:
+            id: settings_search
+            orientation: "horizontal"
+            size_hint: 1, None
+            pos_hint: {"top": .989}
+            padding:[dp(10), 0]
+            size_hint_y:None
+            height:dp(60)
+            radius:[self.height / 2]*4
+            padding:[dp(10), dp(10)]
+            spacing:dp(10)
+            
+            MDIconButton:
+                size_hint_y:1
+                icon:"magnify"
+                size_hint_x:None
+                width:self.height*1.3
+                pos_hint: {"center_y": 0.65}
+            MDTextField:
+                hint_text: "Search Settings"
+                mode: "rectangle"
 
-        MDLabel:
-            text: "Settings Screen of Currency Converter"
-            halign: 'center'
-            font_size: 44
+        ScrollView:
+            size_hint: 1, None
+            height: root.height - settings_search.height
+            pos_hint: {"top": (root.height - (settings_search.height + dp(10)))/root.height}
 
-        MDRaisedButton:
-            text: "Toggle Theme"
-            pos_hint: {"center_x": 0.5}
-            on_press: root.toggle_theme()
+            MDBoxLayout:
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+
+                SettingsItem:
+                    icon: "cash-sync"
+                    text: "Currency"
+                    subtext: "todo"
+                SettingsItem:
+                    icon: "format-text"
+                    text: "Format Currency Values"
+                    subtext: "todo"
+                SettingsItem:
+                    icon: "invert-colors"
+                    text: "Look & Feel"
+                    subtext: "todo"
+                SettingsItem:
+                    icon: "sync"
+                    text: "Synchronisation"
+                    subtext: "todo"
+                SettingsItem:
+                    icon: "information-variant-circle"
+                    text: "About"
+                    subtext: "todo"
+
+    MDRaisedButton:
+        text: "Toggle Theme"
+        pos_hint: {"center_x": 0.5}
+        on_press: root.toggle_theme()

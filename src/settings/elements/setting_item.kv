@@ -1,0 +1,25 @@
+<SettingsItem@ButtonBehavior+MDBoxLayout>:
+    icon:"assets\icons\work-in-progress.png"
+    text:"Setting's category"
+    subtext:"Setting's subtext"
+    size_hint_y:None
+    height:dp(70)
+    padding:dp(10)
+    spacing:dp(10)
+
+    MDIconButton:
+        style: "tonal"
+        size_hint:None, 1
+        width:self.height
+        icon:root.icon
+    MDBoxLayout:
+        orientation:"vertical"
+        MDLabel:
+            id: setting_name
+            text:root.text
+            font_style:"Body1"
+        MDLabel:
+            id: setting_description
+            text:root.subtext
+            font_style:"Body2"
+            font_size: 12
