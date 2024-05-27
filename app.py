@@ -50,6 +50,7 @@ class currencyApp(MDApp):
 			config.setdefaults(section, defaults)
 
 	def navigate_to_settings(self):
+		self.settings.show_settings_screen_instantly()
 		self.screen_manager.transition.direction = "left"
 		self.screen_manager.current = "settings"
 

@@ -1,0 +1,28 @@
+<subSettingsTemplate>: 
+    MDTopAppBar:
+        id: top_bar
+        pos_hint: {"top": 1}
+        elevation: 0
+        left_action_items: [["arrow-left-bold", lambda x: app.settings.show_settings_screen()], ["home", lambda x: app.navigate_to_home()]]
+
+    ScrollView:
+        size_hint: 1, None
+        height: root.height - top_bar.height
+        pos_hint: {"top": (root.height - (top_bar.height + dp(10)))/root.height}
+
+        MDBoxLayout:
+            id: sub_settings
+            orientation: "vertical"
+            size_hint_y: None
+            height: self.minimum_height
+            padding: [dp(20), 0, dp(20), 0]
+            spacing: dp(20)
+
+            MDBoxLayout:
+                size_hint_y:None
+                height:dp(60)
+                padding:dp(10)
+                spacing:dp(10)
+                MDLabel:
+                    text:"This is a setting"
+                    font_size: 35
