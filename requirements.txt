@@ -12,5 +12,6 @@ pillow==10.3.0
 Pygments==2.18.0
 pypiwin32==223
 pywin32==306
+rapidfuzz==3.9.1
 requests==2.32.2
 urllib3==2.2.1

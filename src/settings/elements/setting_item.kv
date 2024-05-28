@@ -1,4 +1,4 @@
-<SettingsItem@ButtonBehavior+MDBoxLayout>:
+<SettingsItem>:
     icon:"assets\icons\work-in-progress.png"
     text:"Setting's category"
     subtext:"Setting's subtext"
@@ -6,6 +6,7 @@
     height:dp(70)
     padding:dp(10)
     spacing:dp(10)
+    on_release: app.settings.screen_manager.current = root.text
 
     MDIconButton:
         style: "tonal"

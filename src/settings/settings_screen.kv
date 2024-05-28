@@ -33,8 +33,10 @@
                 width:self.height*1.3
                 pos_hint: {"center_y": 0.65}
             MDTextField:
+                id: search_field
                 hint_text: "Search Settings"
                 mode: "rectangle"
+                on_text: root.on_search_field_text_change(self.text)
 
         ScrollView:
             size_hint: 1, None
@@ -46,29 +48,3 @@
                 orientation: "vertical"
                 size_hint_y: None
                 height: self.minimum_height
-
-                SettingsItem:
-                    icon: "cash-sync"
-                    text: "Currency"
-                    subtext: "todo"
-                    on_release: app.settings.screen_manager.current = "Currency"
-                SettingsItem:
-                    icon: "format-text"
-                    text: "Format Currency Values"
-                    subtext: "todo"
-                    on_release: app.settings.screen_manager.current = "Format Currency Values"
-                SettingsItem:
-                    icon: "invert-colors"
-                    text: "Look & Feel"
-                    subtext: "todo"
-                    on_release: app.settings.screen_manager.current = "Look & Feel"
-                SettingsItem:
-                    icon: "sync"
-                    text: "Synchronisation"
-                    subtext: "todo"
-                    on_release: app.settings.screen_manager.current = "Synchronisation"
-                SettingsItem:
-                    icon: "information-variant-circle"
-                    text: "About"
-                    subtext: "todo"
-                    on_release: app.settings.screen_manager.current = "About"
