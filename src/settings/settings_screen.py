@@ -15,8 +15,3 @@ class settingsDefaultScreen(MDScreen):
     def __init__(self, config: ConfigParser, **kwargs):
         super(settingsDefaultScreen, self).__init__(**kwargs)
         self.config = config
-
-    def toggle_theme(self):
-        self.config["look and feel"]["theme"] = "Dark" if self.config["look and feel"]["theme"] == "Light" else "Light"
-        self.config.write()
-        MDApp.get_running_app().apply_settings_to_app()
