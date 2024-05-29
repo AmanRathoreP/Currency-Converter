@@ -3,7 +3,7 @@
     text:"Setting's category"
     subtext:"Setting's subtext"
     size_hint_y:None
-    height:dp(70)
+    height:dp(20 + 40 +(15*4)) # 20 for inernal spacing, 40 for setting name and 15 for each search info, and 20 for setting info
     padding:dp(10)
     spacing:dp(10)
     on_release: app.settings.screen_manager.current = root.text
@@ -14,16 +14,43 @@
     MDIconButton:
         style: "tonal"
         size_hint:None, 1
-        width:self.height
         icon:root.icon
-    MDBoxLayout:
-        orientation:"vertical"
-        MDLabel:
-            id: setting_name
-            text:root.text
-            font_style:"Body1"
-        MDLabel:
-            id: setting_description
-            text:root.subtext
-            font_style:"Body2"
-            font_size: 12
+
+    BoxLayout:
+        orientation: "vertical"
+        size_hint_y: None
+        height: root.height
+
+        AnchorLayout:
+            anchor_x: "center"
+            anchor_y: "top"
+            size_hint_y: None
+            height: dp(40)
+            MDLabel:
+                id: setting_name
+                text: root.text
+                font_style: "H6"
+
+        AnchorLayout:
+            id: setting_infos_layout
+            anchor_x: "center"
+            anchor_y: "bottom"
+            size_hint_y: None
+            height: dp(15*4)
+          
+            MDBoxLayout:
+                id: setting_infos
+                orientation: "vertical"
+
+                MDLabel:
+                    font_style: "Body2"
+                    text: "sample text"
+                MDLabel:
+                    font_style: "Body2"
+                    text: "sample text"
+                MDLabel:
+                    font_style: "Body2"
+                    text: "sample text"
+                MDLabel:
+                    font_style: "Body2"
+                    text: "sample text"

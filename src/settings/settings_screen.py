@@ -15,11 +15,11 @@ class settingsDefaultScreen(MDScreen):
         super(settingsDefaultScreen, self).__init__(**kwargs)
         self.config = config
 
-        self.ids.sub_settings_list.add_widget(SettingsItem("cash-sync", "Currency", "todo", "Currency", ["Currency", "Money"]))
-        self.ids.sub_settings_list.add_widget(SettingsItem("format-text", "Format Currency Values", "todo", "Format Currency Values", ["Precision", "Format", "Numbers"]))
-        self.ids.sub_settings_list.add_widget(SettingsItem("invert-colors", "Look & Feel", "todo", "look and feel", ["Look", "Feel"]))
-        self.ids.sub_settings_list.add_widget(SettingsItem("sync", "Synchronisation", "todo", "Synchronisation", ["Synchronisation"]))
-        self.ids.sub_settings_list.add_widget(SettingsItem("information-variant-circle", "About", "todo", "About", ["About", "Info", "Version"]))
+        self.ids.sub_settings_list.add_widget(SettingsItem("cash-sync", "Currency", "Add or remove currencies", "Currency", ["Currency", "Money"]))
+        self.ids.sub_settings_list.add_widget(SettingsItem("format-text", "Format Currency Values", "Format the way converted values are displayed", "Format Currency Values", ["Precision", "Format", "Numbers"]))
+        self.ids.sub_settings_list.add_widget(SettingsItem("invert-colors", "Look & Feel", "Change the themes, app colors, etc.", "look and feel", ["Look", "Feel"]))
+        self.ids.sub_settings_list.add_widget(SettingsItem("sync", "Synchronisation", "Set how often the currencies must ve sync to the server", "Synchronisation", ["Synchronisation"]))
+        self.ids.sub_settings_list.add_widget(SettingsItem("information-variant-circle", "About", "See app's version, author, license, website, etc.", "About", ["About", "Info", "Version"]))
 
         self.config = config
 
@@ -30,6 +30,7 @@ class settingsDefaultScreen(MDScreen):
         search_result = []
         for child_widget in self.ids.sub_settings_list.children:
             res = child_widget.get_search_results(text, 75, 4)
+            child_widget.toggle_search_view(["This is search result"])
             search_result.extend(res if res != -1 else [])
         
         print("---------------------------------------------------------------------------------------------"*5)

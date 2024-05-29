@@ -6,6 +6,7 @@ class searchBackend():
         with open("available_options_for_each_setting.json", 'r') as json_file:
             available_options = json.load(json_file)
 
+        self.settings_section_name = settings_section_name
         try:
             self.options = available_options[settings_section_name]
         except:
