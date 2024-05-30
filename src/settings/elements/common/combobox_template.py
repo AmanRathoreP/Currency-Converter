@@ -1,3 +1,5 @@
+from src.settings.elements.common.individual_setting_template import individualSettingBaseClass
+
 import os
 
 from kivy.lang import Builder
@@ -10,16 +12,11 @@ kivy_design_files = ["combobox_template"]
 for kv_file in kivy_design_files:
     Builder.load_file(os.path.join(os.path.abspath(os.getcwd()), "src", "settings", "elements", "common", kv_file + ".kv"))
 
-class comboBox(MDCard):
+class comboBox(individualSettingBaseClass):
     drop_item_menu: MDDropdownMenu = None
 
     def __init__(self, config: ConfigParser, section_name, setting_name, options, title, **kwargs):
-        MDCard.__init__(self, **kwargs)
-        self.config = config
-        self.section_name = section_name
-        self.setting_name = setting_name
-        self.options = options
-        self.title = title
+        individualSettingBaseClass.__init__(self, config, section_name, setting_name, options, title, **kwargs)
 
         self.ids.label_option_name.text = self.title
         self.ids.button_select.text = self.config.get(section_name, setting_name)

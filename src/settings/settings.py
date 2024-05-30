@@ -35,3 +35,11 @@ class settingsScreen(MDScreen):
         self.add_individual_settings_screen("About", "About")
 
         self.add_widget(self.screen_manager)
+
+    def navigate_to_setting(self, settings_screen_name, setting_section_name = None, setting_name = None):
+        self.screen_manager.current = settings_screen_name
+        if (setting_section_name == None) or (setting_name == None):
+            return
+        for setting_screen in self.screen_manager.children:
+            if setting_screen.name == settings_screen_name:
+                setting_screen.highlight_setting(setting_section_name, setting_name)

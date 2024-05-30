@@ -6,7 +6,7 @@
     height:dp(20 + 40 +(15*4)) # 20 for inernal spacing, 40 for setting name and 15 for each search info, and 20 for setting info
     padding:dp(10)
     spacing:dp(10)
-    on_release: app.settings.screen_manager.current = root.text
+    on_release: app.settings.navigate_to_setting(root.text)
     ripple_behavior: True
     md_bg_color: (*app.theme_cls.primary_color[:3], 0.3)
     ripple_color: (*app.theme_cls.accent_color[:3], 0.25)
