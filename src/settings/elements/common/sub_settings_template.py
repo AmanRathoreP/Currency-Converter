@@ -1,6 +1,7 @@
 from src.settings.elements.common.combobox_template import comboBox
 
 import os
+import json
 
 from kivy.lang import Builder
 from kivy.config import ConfigParser
@@ -12,16 +13,27 @@ for kv_file in kivy_design_files:
 
 class subSettingsTemplate(MDScreen):
     sub_settings_list = []
-    def __init__(self, config: ConfigParser, title = "No title provided", **kwargs):
+    def __init__(self, config: ConfigParser, setting_section_name:str, **kwargs):
         MDScreen.__init__(self, **kwargs)
         self.config = config
-        self.ids.top_bar.title = title
+        self.setting_section_name = setting_section_name
+        self.name = setting_section_name
+
+        with open("available_options_for_each_setting.json", 'r') as json_file:
+            self.setting_properties = json.load(json_file)[setting_section_name]
     
+        self.ids.top_bar.title = self.setting_properties["title"]
+
     def clear_all_available_settings(self):
         self.ids.sub_settings.clear_widgets()
     
-    def add_combo_box(self, section_name, setting_name, options, title):
-        combo_box = comboBox(self.config, section_name, setting_name, options, title)
+    def add_combo_box(self, setting_name_in_settings_properties_json_file, **kwargs):
+        combo_box = comboBox(self.config,
+                             self.setting_section_name,
+                             self.setting_properties["data"][setting_name_in_settings_properties_json_file]["config file's setting name"],
+                             self.setting_properties["data"][setting_name_in_settings_properties_json_file]["options"],
+                             self.setting_properties["data"][setting_name_in_settings_properties_json_file]["title"],
+                             **kwargs)
         self.sub_settings_list.append(combo_box)
         self.ids.sub_settings.add_widget(combo_box)
 

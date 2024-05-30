@@ -16,9 +16,8 @@ class settingsScreen(MDScreen):
         self.screen_manager.current = "default_settings_screen"
         self.screen_manager.transition = MDSwapTransition(duration = .36)
     
-    def add_individual_settings_screen(self, title, name):
-        setting_screen = subSettingsTemplate(self.config, title = title, name = name)
-        self.screen_manager.add_widget(setting_screen)
+    def add_individual_settings_screen(self, setting_section_name_in_config_file):
+        self.screen_manager.add_widget(subSettingsTemplate(self.config, setting_section_name = setting_section_name_in_config_file))
         
     def __init__(self, config: ConfigParser, **kwargs):
         super().__init__(**kwargs)
@@ -28,11 +27,11 @@ class settingsScreen(MDScreen):
         default_settings_screen = settingsDefaultScreen(config, name = "default_settings_screen")
         self.screen_manager.add_widget(default_settings_screen)
 
-        self.add_individual_settings_screen("Currency", "Currency")
-        self.add_individual_settings_screen("Format Currency Values", "Format Currency Values")
-        self.screen_manager.add_widget(lookAndFeel(self.config, title = "Look & Feel", name = "look and feel"))
-        self.add_individual_settings_screen("Synchronisation", "Synchronisation")
-        self.add_individual_settings_screen("About", "About")
+        self.add_individual_settings_screen("currencies to include")
+        self.add_individual_settings_screen("format numbers' looks")
+        self.screen_manager.add_widget(lookAndFeel(self.config))
+        self.add_individual_settings_screen("sync")
+        self.add_individual_settings_screen("about")
 
         self.add_widget(self.screen_manager)
 

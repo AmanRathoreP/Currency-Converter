@@ -1,50 +1,204 @@
 {
     "look and feel": {
-        "primary-palette": [
-            "Red",
-            "Pink",
-            "Purple",
-            "DeepPurple",
-            "Indigo",
-            "Blue",
-            "LightBlue",
-            "Cyan",
-            "Teal",
-            "Green",
-            "LightGreen",
-            "Lime",
-            "Yellow",
-            "Amber",
-            "Orange",
-            "DeepOrange",
-            "Brown",
-            "Gray",
-            "BlueGray"
+        "title": "Look & Feel",
+        "description": "Change the themes, app colors, etc.",
+        "icon": "invert-colors",
+        "alternate search strings": [
+            "Look",
+            "Look & Feel",
+            "Feel",
+            "Design"
         ],
-        "accent-palette": [
-            "Red",
-            "Pink",
-            "Purple",
-            "DeepPurple",
-            "Indigo",
-            "Blue",
-            "LightBlue",
-            "Cyan",
-            "Teal",
-            "Green",
-            "LightGreen",
-            "Lime",
-            "Yellow",
-            "Amber",
-            "Orange",
-            "DeepOrange",
-            "Brown",
-            "Gray",
-            "BlueGray"
+        "data": {
+            "primary-palette": {
+                "options": [
+                    "Red",
+                    "Pink",
+                    "Purple",
+                    "DeepPurple",
+                    "Indigo",
+                    "Blue",
+                    "LightBlue",
+                    "Cyan",
+                    "Teal",
+                    "Green",
+                    "LightGreen",
+                    "Lime",
+                    "Yellow",
+                    "Amber",
+                    "Orange",
+                    "DeepOrange",
+                    "Brown",
+                    "Gray",
+                    "BlueGray"
+                ],
+                "config file's setting name": "primary-palette",
+                "title": "Primary Palette",
+                "alternate search strings": [
+                    "Primary Palette",
+                    "Colours",
+                    "Colour",
+                    "Colors",
+                    "Color",
+                    "Palette"
+                ],
+                "type": "combo box"
+            },
+            "accent-palette": {
+                "options": [
+                    "Red",
+                    "Pink",
+                    "Purple",
+                    "DeepPurple",
+                    "Indigo",
+                    "Blue",
+                    "LightBlue",
+                    "Cyan",
+                    "Teal",
+                    "Green",
+                    "LightGreen",
+                    "Lime",
+                    "Yellow",
+                    "Amber",
+                    "Orange",
+                    "DeepOrange",
+                    "Brown",
+                    "Gray",
+                    "BlueGray"
+                ],
+                "config file's setting name": "accent-palette",
+                "title": "Accent Palette",
+                "alternate search strings": [
+                    "Accent Palette",
+                    "Colours",
+                    "Colour",
+                    "Colors",
+                    "Color",
+                    "Palette"
+                ],
+                "type": "combo box"
+            },
+            "theme": {
+                "options": [
+                    "Light",
+                    "Dark"
+                ],
+                "config file's setting name": "theme",
+                "title": "Theme",
+                "alternate search strings": [],
+                "type": "combo box"
+            }
+        }
+    },
+    "currencies to include": {
+        "title": "Currency",
+        "description": "Add or remove currencies",
+        "icon": "cash-sync",
+        "alternate search strings": [
+            "Money",
+            "Currency",
+            "Cash"
         ],
-        "theme": [
-            "Light",
-            "Dark"
-        ]
+        "data": {
+            "test setting 1": {
+                "options": [],
+                "config file's setting name": "",
+                "title": "check for setting 1 of currencies to include",
+                "alternate search strings": [],
+                "type": "info label"
+            },
+            "test setting 2": {
+                "options": [],
+                "config file's setting name": "",
+                "title": "check for setting 2 of currencies to include",
+                "alternate search strings": [],
+                "type": "info label"
+            }
+        }
+    },
+    "format numbers' looks": {
+        "title": "Format Currency Values",
+        "description": "Format the way converted values are displayed",
+        "icon": "format-text",
+        "alternate search strings": [
+            "Precision",
+            "Format",
+            "Numbers"
+        ],
+        "data": {
+            "test setting 1": {
+                "options": [],
+                "config file's setting name": "",
+                "title": "check for setting 1 of format numbers' looks",
+                "alternate search strings": [],
+                "type": "info label"
+            },
+            "test setting 2": {
+                "options": [],
+                "config file's setting name": "",
+                "title": "check for setting 2 of format numbers' looks",
+                "alternate search strings": [],
+                "type": "info label"
+            }
+        }
+    },
+    "sync": {
+        "title": "Synchronisation",
+        "description": "Set how often the currencies must be sync to the server",
+        "icon": "sync",
+        "alternate search strings": [
+            "Synchronisation",
+            "sync",
+            "sync interval",
+            "server",
+            "update interval",
+            "interval"
+        ],
+        "data": {
+            "test setting 1": {
+                "options": [],
+                "config file's setting name": "",
+                "title": "check for setting 1 of Synchronisation",
+                "alternate search strings": [],
+                "type": "info label"
+            },
+            "test setting 2": {
+                "options": [],
+                "config file's setting name": "",
+                "title": "check for setting 2 of Synchronisation",
+                "alternate search strings": [],
+                "type": "info label",
+                "subtitle": "This info is a subtitle"
+            }
+        }
+    },
+    "about": {
+        "title": "About",
+        "description": "See app's version, author, license, website, etc.",
+        "icon": "information-variant-circle",
+        "alternate search strings": [
+            "About",
+            "Info",
+            "Version",
+            "Author"
+        ],
+        "data": {
+            "version": {
+                "options": [],
+                "config file's setting name": "",
+                "title": "version",
+                "alternate search strings": [],
+                "type": "info label",
+                "subtitle": "This info is about version"
+            },
+            "author": {
+                "options": [],
+                "config file's setting name": "",
+                "title": "Author",
+                "alternate search strings": [],
+                "type": "info label",
+                "subtitle": "This info is about Author"
+            }
+        }
     }
 }

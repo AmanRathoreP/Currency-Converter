@@ -15,13 +15,13 @@ for kv_file in kivy_design_files:
 
 class SettingsItem(MDCard, ButtonBehavior, searchBackend):
     radius_for_the_search_result_card = dp(10)
-    def __init__(self, icon: str, text: str, setting_info: str, settings_section_name: str, alternate_searchable_string: list[str] = []):
+    def __init__(self, settings_section_name: str):
         super(SettingsItem, self).__init__()
-        searchBackend.__init__(self, settings_section_name, alternate_searchable_string)
+        searchBackend.__init__(self, settings_section_name)
         
-        self.icon = icon
-        self.text = text
-        self.setting_info = setting_info
+        self.icon = self.setting_properties["icon"]
+        self.text = self.setting_properties["title"]
+        self.setting_info = self.setting_properties["description"]
         self.name = settings_section_name
         #! self.toggle_search_view(["d234", "234d"]*2)
         self.toggle_search_view()

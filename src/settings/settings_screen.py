@@ -16,19 +16,10 @@ class settingsDefaultScreen(MDScreen):
         super(settingsDefaultScreen, self).__init__(**kwargs)
         self.config = config
 
-        self.individual_settings_row = {
-                                    "Currency": SettingsItem("cash-sync", "Currency", "Add or remove currencies", "Currency", ["Currency", "Money"]),
-                                    "Format Currency Values": SettingsItem("format-text", "Format Currency Values", "Format the way converted values are displayed", "Format Currency Values", ["Precision", "Format", "Numbers"]),
-                                    "look and feel": SettingsItem("invert-colors", "Look & Feel", "Change the themes, app colors, etc.", "look and feel", ["Look", "Feel"]),
-                                    "Synchronisation": SettingsItem("sync", "Synchronisation", "Set how often the currencies must ve sync to the server", "Synchronisation", ["Synchronisation", "Sync"]),
-                                    "About": SettingsItem("information-variant-circle", "About", "See app's version, author, license, website, etc.", "About", ["About", "Info", "Version"])
-        }
-
-        self.ids.sub_settings_list.add_widget(self.individual_settings_row["Currency"])
-        self.ids.sub_settings_list.add_widget(self.individual_settings_row["Format Currency Values"])
-        self.ids.sub_settings_list.add_widget(self.individual_settings_row["look and feel"])
-        self.ids.sub_settings_list.add_widget(self.individual_settings_row["Synchronisation"])
-        self.ids.sub_settings_list.add_widget(self.individual_settings_row["About"])
+        self.individual_settings_row = {}
+        for individual_settings_row_section_name in ["currencies to include", "format numbers' looks", "look and feel", "sync", "about"]:
+            self.individual_settings_row[individual_settings_row_section_name] = SettingsItem(individual_settings_row_section_name)
+            self.ids.sub_settings_list.add_widget(self.individual_settings_row[individual_settings_row_section_name])
 
         self.config = config
 
