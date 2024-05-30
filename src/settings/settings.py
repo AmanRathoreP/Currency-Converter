@@ -30,16 +30,17 @@ class settingsScreen(MDScreen):
 
         self.add_individual_settings_screen("Currency", "Currency")
         self.add_individual_settings_screen("Format Currency Values", "Format Currency Values")
-        self.screen_manager.add_widget(lookAndFeel(self.config, "Look & Feel", name = "Look & Feel"))
+        self.screen_manager.add_widget(lookAndFeel(self.config, title = "Look & Feel", name = "look and feel"))
         self.add_individual_settings_screen("Synchronisation", "Synchronisation")
         self.add_individual_settings_screen("About", "About")
 
         self.add_widget(self.screen_manager)
 
-    def navigate_to_setting(self, settings_screen_name, setting_section_name = None, setting_name = None):
-        self.screen_manager.current = settings_screen_name
-        if (setting_section_name == None) or (setting_name == None):
+    def navigate_to_setting(self, setting_section_name, setting_name = None):
+        # screen name is same as section name
+        self.screen_manager.current = setting_section_name
+        if setting_name == None:
             return
         for setting_screen in self.screen_manager.children:
-            if setting_screen.name == settings_screen_name:
+            if setting_screen.name == setting_section_name:
                 setting_screen.highlight_setting(setting_section_name, setting_name)

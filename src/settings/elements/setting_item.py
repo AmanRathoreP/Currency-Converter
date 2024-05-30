@@ -22,6 +22,7 @@ class SettingsItem(MDCard, ButtonBehavior, searchBackend):
         self.icon = icon
         self.text = text
         self.setting_info = setting_info
+        self.name = settings_section_name
         #! self.toggle_search_view(["d234", "234d"]*2)
         self.toggle_search_view()
 
@@ -53,7 +54,7 @@ class SettingsItem(MDCard, ButtonBehavior, searchBackend):
             search_info_card.ripple_behavior = True
             search_info_card.radius = dp(0)
             running_app = MDApp.get_running_app()
-            search_info_card.on_release = lambda: running_app.settings.navigate_to_setting(self.text, self.settings_section_name, string_is_of_which_setting)
+            search_info_card.on_release = lambda: running_app.settings.navigate_to_setting(self.settings_section_name, string_is_of_which_setting)
             search_info_card.md_bg_color = (*running_app.theme_cls.accent_color[:3], 0.3 * 2)
             search_info_card.ripple_color = (*running_app.theme_cls.primary_color[:3], 0.25 * 2)
 
