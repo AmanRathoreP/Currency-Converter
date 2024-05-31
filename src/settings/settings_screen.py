@@ -28,6 +28,7 @@ class settingsDefaultScreen(MDScreen):
             self.ids.search_field.text = ''
             self.ids.sub_settings_list.clear_widgets()
             for setting_item_str in self.individual_settings_row:
+                self.individual_settings_row[setting_item_str].toggle_search_view()
                 self.ids.sub_settings_list.add_widget(self.individual_settings_row[setting_item_str])
 
             return
