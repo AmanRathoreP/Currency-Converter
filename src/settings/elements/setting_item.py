@@ -43,9 +43,17 @@ class SettingsItem(MDCard, ButtonBehavior, searchBackend):
         current_index_of_string_to_show:int = 0
         max_string_size = 1
         for res in string_to_show:
+            res = SettingsItem._filter_search_result_to_show_on_screen(res)
+            res = '' if res == -1 else res
             max_string_size = len(res) if len(res)>max_string_size else max_string_size
         
         for res in string_to_show:
+            res = SettingsItem._filter_search_result_to_show_on_screen(res)
+            if res == -1:
+                # returning if the search result is from alternate search string of sub-setting
+                self.toggle_search_view()
+                return
+
             search_info_card = MDCard()
             search_info_label = MDLabel(text = res, font_style = "Body2")
             search_info_label.padding = [dp(20), 0, 0, 0]
