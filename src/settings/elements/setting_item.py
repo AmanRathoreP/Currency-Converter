@@ -43,7 +43,8 @@ class SettingsItem(MDCard, ButtonBehavior, searchBackend):
         current_index_of_string_to_show:int = 0
         max_string_size = 1
         for res in string_to_show:
-            max_string_size = len(string_to_show) if len(string_to_show)>max_string_size else max_string_size
+            max_string_size = len(res) if len(res)>max_string_size else max_string_size
+        
         for res in string_to_show:
             search_info_card = MDCard()
             search_info_label = MDLabel(text = res, font_style = "Body2")
