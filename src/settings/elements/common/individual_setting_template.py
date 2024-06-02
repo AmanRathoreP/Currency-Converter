@@ -1,13 +1,10 @@
 from kivy.config import ConfigParser
 from kivy.animation import Animation
 from kivymd.uix.card import MDCard
-from kivymd.uix.menu import MDDropdownMenu
 from kivymd.app import MDApp
 
 
 class individualSettingBaseClass(MDCard):
-    drop_item_menu: MDDropdownMenu = None
-
     def __init__(self, config: ConfigParser, section_name, setting_name, title, **kwargs):
         MDCard.__init__(self, **kwargs)
         self.config = config

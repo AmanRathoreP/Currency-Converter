@@ -1,7 +1,5 @@
 from src.settings.elements.common.sub_settings_template import subSettingsTemplate
 
-import json
-
 from kivy.config import ConfigParser
 
 class lookAndFeel(subSettingsTemplate):

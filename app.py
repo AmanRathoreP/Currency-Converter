@@ -1,6 +1,6 @@
 from kivy import require as kivy_require
 kivy_require("2.3.0")
-from kivy.config import Config, ConfigParser
+from kivy.config import Config
 sizes = {
 	"16x9":[16,9],
 	# "android":[1080,2408],
@@ -18,8 +18,6 @@ from src.settings.settings import settingsScreen
 import json
 
 from kivy.uix.screenmanager import ScreenManager
-from kivy.lang import Builder
-from kivy.uix.screenmanager import SlideTransition
 from kivymd.app import MDApp
 
 class currencyApp(MDApp):

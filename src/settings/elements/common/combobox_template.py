@@ -4,7 +4,6 @@ import os
 
 from kivy.lang import Builder
 from kivy.config import ConfigParser
-from kivymd.uix.card import MDCard
 from kivymd.uix.menu import MDDropdownMenu
 from kivymd.app import MDApp
 
