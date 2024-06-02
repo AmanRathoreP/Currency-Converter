@@ -1,4 +1,5 @@
 from src.settings.elements.common.combobox_template import comboBox
+from src.settings.elements.common.info_label_template import infoLabel
 
 import os
 import json
@@ -26,6 +27,7 @@ class subSettingsTemplate(MDScreen):
 
     def clear_all_available_settings(self):
         self.ids.sub_settings.clear_widgets()
+        return self
     
     def add_combo_box(self, setting_name_in_settings_properties_json_file, **kwargs):
         combo_box = comboBox(self.config,
@@ -42,3 +44,12 @@ class subSettingsTemplate(MDScreen):
             if (sub_setting.section_name == section_name) and (sub_setting.setting_name == setting_name):
                 sub_setting.animate_for_easy_navigation()
 
+    def add_info_label(self, setting_name_in_settings_properties_json_file, **kwargs):
+        info_label = infoLabel(None, None, None,
+                             self.setting_properties["data"][setting_name_in_settings_properties_json_file]["title"],
+                             self.setting_properties["data"][setting_name_in_settings_properties_json_file]["description"],
+                             **kwargs)
+        self.sub_settings_list.append(info_label)
+        self.ids.sub_settings.add_widget(info_label)
+
+        return self

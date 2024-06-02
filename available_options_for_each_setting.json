@@ -103,14 +103,16 @@
             "test setting 1": {
                 "options": [],
                 "config file's setting name": "",
-                "title": "check for setting 1 of currencies to include",
+                "title": "Title for test setting 2",
+                "description": "check for setting 1 of currencies to include",
                 "alternate search strings": [],
                 "type": "info label"
             },
             "test setting 2": {
                 "options": [],
                 "config file's setting name": "",
-                "title": "check for setting 2 of currencies to include",
+                "title": "Title for test setting 2",
+                "description": "check for setting 2 of currencies to include",
                 "alternate search strings": [],
                 "type": "info label"
             }
@@ -129,15 +131,23 @@
             "test setting 1": {
                 "options": [],
                 "config file's setting name": "",
-                "title": "check for setting 1 of format numbers' looks",
-                "alternate search strings": [],
+                "title": "test setting 1's title",
+                "description": "check for setting 1 of format numbers' looks",
+                "alternate search strings": [
+                    "check 1",
+                    "test 2"
+                ],
                 "type": "info label"
             },
             "test setting 2": {
                 "options": [],
                 "config file's setting name": "",
-                "title": "check for setting 2 of format numbers' looks",
-                "alternate search strings": [],
+                "title": "test setting 2's title",
+                "description": "check for setting 2 of format numbers' looks",
+                "alternate search strings": [
+                    "check 2",
+                    "test 2"
+                ],
                 "type": "info label"
             }
         }
@@ -158,14 +168,16 @@
             "test setting 1": {
                 "options": [],
                 "config file's setting name": "",
-                "title": "check for setting 1 of Synchronisation",
+                "title": "This is title",
+                "description": "check for setting 1 of Synchronisation",
                 "alternate search strings": [],
                 "type": "info label"
             },
             "test setting 2": {
                 "options": [],
                 "config file's setting name": "",
-                "title": "check for setting 2 of Synchronisation",
+                "title": "This is title",
+                "description": "check for setting 2 of Synchronisation",
                 "alternate search strings": [],
                 "type": "info label",
                 "subtitle": "This info is a subtitle"
@@ -187,6 +199,7 @@
                 "options": [],
                 "config file's setting name": "",
                 "title": "version",
+                "description": "This is version v000",
                 "alternate search strings": [],
                 "type": "info label",
                 "subtitle": "This info is about version"
@@ -195,6 +208,7 @@
                 "options": [],
                 "config file's setting name": "",
                 "title": "Author",
+                "description": "Created by Aman Rathore",
                 "alternate search strings": [],
                 "type": "info label",
                 "subtitle": "This info is about Author"

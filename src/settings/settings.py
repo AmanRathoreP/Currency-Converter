@@ -28,7 +28,7 @@ class settingsScreen(MDScreen):
         self.screen_manager.add_widget(default_settings_screen)
 
         self.add_individual_settings_screen("currencies to include")
-        self.add_individual_settings_screen("format numbers' looks")
+        self.screen_manager.add_widget(subSettingsTemplate(self.config, setting_section_name = "format numbers' looks").clear_all_available_settings().add_info_label("test setting 1").add_info_label("test setting 2"))
         self.screen_manager.add_widget(lookAndFeel(self.config))
         self.add_individual_settings_screen("sync")
         self.add_individual_settings_screen("about")

@@ -8,12 +8,11 @@ from kivymd.app import MDApp
 class individualSettingBaseClass(MDCard):
     drop_item_menu: MDDropdownMenu = None
 
-    def __init__(self, config: ConfigParser, section_name, setting_name, options, title, **kwargs):
+    def __init__(self, config: ConfigParser, section_name, setting_name, title, **kwargs):
         MDCard.__init__(self, **kwargs)
         self.config = config
         self.section_name = section_name
         self.setting_name = setting_name
-        self.options = options
         self.title = title
 
     def animate_for_easy_navigation(self):

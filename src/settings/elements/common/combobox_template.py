@@ -16,8 +16,9 @@ class comboBox(individualSettingBaseClass):
     drop_item_menu: MDDropdownMenu = None
 
     def __init__(self, config: ConfigParser, section_name, setting_name, options, title, **kwargs):
-        individualSettingBaseClass.__init__(self, config, section_name, setting_name, options, title, **kwargs)
+        individualSettingBaseClass.__init__(self, config, section_name, setting_name, title, **kwargs)
 
+        self.options = options
         self.ids.label_option_name.text = self.title
         self.ids.button_select.text = self.config.get(section_name, setting_name)
 
