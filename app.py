@@ -12,12 +12,19 @@ current_size = "dev"
 Config.set('graphics', 'width', str(int(sizes[current_size][0]*size_multiplier)))
 Config.set('graphics', 'height', str(int(sizes[current_size][1]*size_multiplier)))
 
+if __name__ == '__main__':
+	import os, sys
+	from kivy.resources import resource_add_path
+	if hasattr(sys, '_MEIPASS'):
+		resource_add_path(os.path.join(sys._MEIPASS))
+
 from src.home.home import homeScreen
 from src.settings.settings import settingsScreen
 
 import json
 
 from kivy.uix.screenmanager import ScreenManager
+from kivy.resources import resource_find
 from kivymd.app import MDApp
 
 class currencyApp(MDApp):
@@ -28,7 +35,7 @@ class currencyApp(MDApp):
 
 	def on_start(self):
 		self.title = "Currency Converter"
-		self.icon = "assets/icons/work-in-progress.png"
+		self.icon = resource_find("assets/icons/work-in-progress.png")
 		self.apply_settings_to_app()
 
 	def build(self):
@@ -41,7 +48,7 @@ class currencyApp(MDApp):
 	
 	def build_config(self, config):
 		# loading app's default
-		with open("app_defaults.json", 'r') as json_file:
+		with open(resource_find("app_defaults.json"), 'r') as json_file:
 			defaults_data_json = json.load(json_file)
 
 		for section, defaults in defaults_data_json.items():

@@ -6,6 +6,7 @@ import json
 
 from kivy.lang import Builder
 from kivy.config import ConfigParser
+from kivy.resources import resource_find
 from kivymd.uix.screen import MDScreen
 
 kivy_design_files = ["sub_settings_template"]
@@ -20,7 +21,7 @@ class subSettingsTemplate(MDScreen):
         self.setting_section_name = setting_section_name
         self.name = setting_section_name
 
-        with open("available_options_for_each_setting.json", 'r') as json_file:
+        with open(resource_find("available_options_for_each_setting.json"), 'r') as json_file:
             self.setting_properties = json.load(json_file)[setting_section_name]
     
         self.ids.top_bar.title = self.setting_properties["title"]

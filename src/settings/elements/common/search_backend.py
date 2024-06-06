@@ -1,5 +1,7 @@
 import json
 from rapidfuzz import process, fuzz
+if __name__ != "__main__":
+    from kivy.resources import resource_find
 
 class searchBackend():
     def __init__(self, settings_section_name: str = None):
@@ -7,8 +9,12 @@ class searchBackend():
         if settings_section_name == None:
             return
 
-        with open("available_options_for_each_setting.json", 'r') as json_file:
-            self.setting_properties = json.load(json_file)[settings_section_name]
+        if __name__ != "__main__":
+            with open(resource_find("available_options_for_each_setting.json"), 'r') as json_file:
+                self.setting_properties = json.load(json_file)[settings_section_name]
+        else:
+            with open("available_options_for_each_setting.json", 'r') as json_file:
+                self.setting_properties = json.load(json_file)[settings_section_name]
 
         self.settings_section_name = settings_section_name
         self.alternate_searchable_string = self.setting_properties["alternate search strings"]
