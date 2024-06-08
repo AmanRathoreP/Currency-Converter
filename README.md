@@ -26,9 +26,12 @@
 
 # Quick start
 
+## Pre-Compiled download
+...
+
 ## Self-Build
 
-### Windows
+### Windows(exe)
 
 Run the below commands one by one
 
@@ -52,9 +55,13 @@ Run the below commands one by one
   ```
   pip install -r requirements.txt
   ```
-* Executing main source file for app
+* Generate `.spec` using below command
   ```
-  app.py
+  python generate_spec_for_exe.py
+  ```
+* Build exe using below command
+  ```
+  python -m PyInstaller exe_build.spec
   ```
 
 # Contributing [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](issues.md)
