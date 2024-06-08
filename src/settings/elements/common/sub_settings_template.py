@@ -11,7 +11,7 @@ from kivymd.uix.screen import MDScreen
 
 kivy_design_files = ["sub_settings_template"]
 for kv_file in kivy_design_files:
-    Builder.load_file(os.path.join(os.path.abspath(os.getcwd()), "src", "settings", "elements", "common", kv_file + ".kv"))
+    Builder.load_file(os.path.join(os.path.dirname(os.path.realpath( __file__ )), kv_file + ".kv"))
 
 class subSettingsTemplate(MDScreen):
     sub_settings_list = []

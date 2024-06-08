@@ -6,7 +6,7 @@ from kivy.config import ConfigParser
 
 kivy_design_files = ["home"]
 for kv_file in kivy_design_files:
-    Builder.load_file(os.path.join(os.path.abspath(os.getcwd()), "src", "home", kv_file + ".kv"))
+    Builder.load_file(os.path.join(os.path.dirname(os.path.realpath( __file__ )), kv_file + ".kv"))
 
 class homeScreen(Screen):
     def __init__(self, config: ConfigParser, **kwargs):
