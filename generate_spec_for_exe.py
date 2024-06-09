@@ -55,6 +55,7 @@ exe = EXE(
     entitlements_file=None,
     icon=[\"{app_icon_file_path}\"],
     *[Tree(p) for p in (sdl2.dep_bins + glew.dep_bins)],
+    hide_console=None,
 )
 """
 
@@ -85,6 +86,13 @@ def get_files_name_with_particular_extensions(directory, extensions, search_subd
     return filtered_files
 
 if __name__ == "__main__":
+    from sys import argv as cli_args
+
+    for cli_arg in cli_args:
+        if cli_arg == "--hide-console" or cli_arg == "-hc":
+            print("Setting hide_console to hide-early")
+            spec_template = spec_template.replace("hide_console=None,", "hide_console=\'hide-early\',")
+
     datas = []
     files = get_files_name_with_particular_extensions([os.path.join('.', "src")], ["kv"])
     files.extend(get_files_name_with_particular_extensions([os.path.join('.', "assets")], ["png", "jpg", "svg", "jpeg", "bmp"]))
