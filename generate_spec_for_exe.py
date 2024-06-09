@@ -92,6 +92,19 @@ if __name__ == "__main__":
         if cli_arg == "--hide-console" or cli_arg == "-hc":
             print("Setting hide_console to hide-early")
             spec_template = spec_template.replace("hide_console=None,", "hide_console=\'hide-early\',")
+        if cli_arg == "--onedir" or cli_arg == "-od":
+            print("Creating one directory exe")
+            spec_template = spec_template.replace("    a.binaries,\n    a.datas,\n    [],", "\t[],\t\n\texclude_binaries=True,")
+            spec_template = spec_template.replace("    upx_exclude=[],\n    runtime_tmpdir=None,\n", '')
+            spec_template +=f"""\ncoll = COLLECT(
+\texe,
+\ta.binaries,
+\ta.datas,
+\tstrip=False,
+\tupx=True,
+\tupx_exclude=[],
+\tname=\"{app_name}\",
+)"""
 
     datas = []
     files = get_files_name_with_particular_extensions([os.path.join('.', "src")], ["kv"])
