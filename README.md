@@ -57,8 +57,11 @@ Run the below commands one by one
   ```
 * Generate `.spec` using below command
   ```
-  python generate_spec_for_exe.py
+  python generate_spec_for_exe.py --onedir
   ```
+  > Note that you can also use command line args like `--onedir`/`-od`, `--hide-console`/`-hc`.
+    * `--onedir`/`-od` means that instead of an standalone exe user will be required to have bunch of file in order to run the app.
+    * `--hide-console`/`-hc` means that no console will be displayed to the user after exe is created.
 * Build exe using below command
   ```
   python -m PyInstaller exe_build.spec
