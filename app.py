@@ -57,7 +57,7 @@ class currencyApp(MDApp):
 					try:
 						__setting_default_data_dict[sub_setting] = json_data[setting]["data"][sub_setting]["default"]
 					except:
-						print(f"No default for {setting} -> {sub_setting} found.")
+						print(f"No default(s) for \"{setting}\" -> \"{sub_setting}\" found.")
 				defaults_data_json[setting] = __setting_default_data_dict
 
 		for section, defaults in defaults_data_json.items():
