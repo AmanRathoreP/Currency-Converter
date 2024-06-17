@@ -27,11 +27,11 @@ class settingsScreen(MDScreen):
         default_settings_screen = settingsDefaultScreen(config, name = "default_settings_screen")
         self.screen_manager.add_widget(default_settings_screen)
 
-        self.add_individual_settings_screen("currencies to include")
-        self.screen_manager.add_widget(subSettingsTemplate(self.config, setting_section_name = "format numbers' looks").clear_all_available_settings().add_info_label("test setting 1").add_info_label("test setting 2"))
+        self.screen_manager.add_widget(subSettingsTemplate(self.config, setting_section_name = "currencies to include").add_all_possible_settings()[0])
+        self.screen_manager.add_widget(subSettingsTemplate(self.config, setting_section_name = "format numbers' looks").add_all_possible_settings()[0])
         self.screen_manager.add_widget(lookAndFeel(self.config))
-        self.add_individual_settings_screen("sync")
-        self.add_individual_settings_screen("about")
+        self.screen_manager.add_widget(subSettingsTemplate(self.config, setting_section_name = "sync").add_all_possible_settings()[0])
+        self.screen_manager.add_widget(subSettingsTemplate(self.config, setting_section_name = "about").add_all_possible_settings()[0])
 
         self.add_widget(self.screen_manager)
 

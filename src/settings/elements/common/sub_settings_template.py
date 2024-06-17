@@ -54,3 +54,33 @@ class subSettingsTemplate(MDScreen):
         self.ids.sub_settings.add_widget(info_label)
 
         return self
+
+    def add_all_possible_settings(self, clear_all_the_available_settings=True, **kwargs) -> tuple:
+        """
+        Adds all the settings which are available in the JSON `self.setting_properties["data"]`,
+        and whose template is also available.
+
+        Args:
+        - clear_all_the_available_settings (bool): Clears previous setting(s) before adding any setting(s). Default is True.
+        - **kwargs: Additional keyword arguments passed to individual setting addition methods.
+
+        Returns:
+        - Tuple containing (self, settings_not_added):
+            - self: The instance of the class.
+            - settings_not_added (list): List of setting names which could not be added due to unsupported types or other issues.
+        """
+        
+        if clear_all_the_available_settings:
+            self.clear_all_available_settings()
+
+        settings_not_added = []
+        for setting_name_in_settings_properties_json_file in self.setting_properties["data"]:
+            if self.setting_properties["data"][setting_name_in_settings_properties_json_file]["type"] == "combo box":
+                self.add_combo_box(setting_name_in_settings_properties_json_file, **kwargs)
+            elif self.setting_properties["data"][setting_name_in_settings_properties_json_file]["type"] == "info label":
+                self.add_info_label(setting_name_in_settings_properties_json_file, **kwargs)
+            else:
+                settings_not_added.append(setting_name_in_settings_properties_json_file)
+        
+        return self, settings_not_added
+
