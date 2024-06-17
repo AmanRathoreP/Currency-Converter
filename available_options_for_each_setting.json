@@ -42,7 +42,8 @@
                     "Color",
                     "Palette"
                 ],
-                "type": "combo box"
+                "type": "combo box",
+                "default": "LightGreen"
             },
             "accent-palette": {
                 "options": [
@@ -76,7 +77,8 @@
                     "Color",
                     "Palette"
                 ],
-                "type": "combo box"
+                "type": "combo box",
+                "default": "DeepPurple"
             },
             "theme": {
                 "options": [
@@ -86,7 +88,8 @@
                 "config file's setting name": "theme",
                 "title": "Theme",
                 "alternate search strings": [],
-                "type": "combo box"
+                "type": "combo box",
+                "default": "Light"
             }
         }
     },

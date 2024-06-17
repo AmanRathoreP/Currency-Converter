@@ -48,8 +48,17 @@ class currencyApp(MDApp):
 	
 	def build_config(self, config):
 		# loading app's default
-		with open(resource_find("app_defaults.json"), 'r') as json_file:
-			defaults_data_json = json.load(json_file)
+		with open(resource_find("available_options_for_each_setting.json"), 'r') as json_file:
+			json_data = json.load(json_file)
+			defaults_data_json = {}
+			for setting in json_data:
+				__setting_default_data_dict = {}
+				for sub_setting in json_data[setting]["data"]:
+					try:
+						__setting_default_data_dict[sub_setting] = json_data[setting]["data"][sub_setting]["default"]
+					except:
+						print(f"No default for {setting} -> {sub_setting} found.")
+				defaults_data_json[setting] = __setting_default_data_dict
 
 		for section, defaults in defaults_data_json.items():
 			config.setdefaults(section, defaults)
