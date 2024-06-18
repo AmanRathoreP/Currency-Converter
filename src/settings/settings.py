@@ -1,5 +1,4 @@
 from src.settings.elements.common.sub_settings_template import subSettingsTemplate
-from src.settings.elements.sub_settings.look_and_feel import lookAndFeel
 from src.settings.settings_screen import settingsDefaultScreen
 
 from kivy.config import ConfigParser
@@ -29,7 +28,7 @@ class settingsScreen(MDScreen):
 
         self.screen_manager.add_widget(subSettingsTemplate(self.config, setting_section_name = "currencies to include").add_all_possible_settings()[0])
         self.screen_manager.add_widget(subSettingsTemplate(self.config, setting_section_name = "format numbers' looks").add_all_possible_settings()[0])
-        self.screen_manager.add_widget(lookAndFeel(self.config))
+        self.screen_manager.add_widget(subSettingsTemplate(self.config, setting_section_name = "look and feel").add_all_possible_settings()[0])
         self.screen_manager.add_widget(subSettingsTemplate(self.config, setting_section_name = "sync").add_all_possible_settings()[0])
         self.screen_manager.add_widget(subSettingsTemplate(self.config, setting_section_name = "about").add_all_possible_settings()[0])
 
