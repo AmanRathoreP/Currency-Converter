@@ -26,7 +26,7 @@ class SettingsItem(MDCard, ButtonBehavior, searchBackend):
         #! self.toggle_search_view(["d234", "234d"]*2)
         self.toggle_search_view()
 
-    def toggle_search_view(self, string_to_show:list[str] = None, string_is_of_which_setting:str = None):
+    def toggle_search_view(self, string_to_show:list[str] = None, string_is_of_which_setting:list[str] = None):
         self.ids.setting_infos.clear_widgets()
 
         if string_to_show == None:
@@ -47,7 +47,7 @@ class SettingsItem(MDCard, ButtonBehavior, searchBackend):
             res = '' if res == -1 else res
             max_string_size = len(res) if len(res)>max_string_size else max_string_size
         
-        for res in string_to_show:
+        for res, setting_name in zip(string_to_show, string_is_of_which_setting):
             res = SettingsItem._filter_search_result_to_show_on_screen(res)
             if res == -1:
                 # returning if the search result is from alternate search string of sub-setting
@@ -63,7 +63,7 @@ class SettingsItem(MDCard, ButtonBehavior, searchBackend):
             search_info_card.ripple_behavior = True
             search_info_card.radius = dp(0)
             running_app = MDApp.get_running_app()
-            search_info_card.on_release = lambda: running_app.settings.navigate_to_setting(self.settings_section_name, string_is_of_which_setting)
+            search_info_card.on_release = lambda __setting_name = setting_name, : running_app.settings.navigate_to_setting(self.settings_section_name, __setting_name)
             search_info_card.md_bg_color = (*running_app.theme_cls.accent_color[:3], 0.3 * 2)
             search_info_card.ripple_color = (*running_app.theme_cls.primary_color[:3], 0.25 * 2)
 

@@ -43,10 +43,12 @@ class settingsDefaultScreen(MDScreen):
         for setting_item_str in self.individual_settings_row:
             if setting_item_str in search_results:
                 strings_list_to_send = []
+                settings_name_list_to_send = []
                 self.ids.sub_settings_list.add_widget(self.individual_settings_row[setting_item_str])
                 for info_tuple in search_results[setting_item_str]:
                     strings_list_to_send.append(info_tuple[1])
-                self.individual_settings_row[setting_item_str].toggle_search_view(strings_list_to_send, info_tuple[0])
+                    settings_name_list_to_send.append(info_tuple[0])
+                self.individual_settings_row[setting_item_str].toggle_search_view(strings_list_to_send, settings_name_list_to_send)
                 continue
             self.individual_settings_row[setting_item_str].toggle_search_view()
             self.ids.sub_settings_list.remove_widget(self.individual_settings_row[setting_item_str])

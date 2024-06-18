@@ -23,4 +23,3 @@ class individualSettingBaseClass(MDCard):
             anim += Animation(md_bg_color = (*running_app.theme_cls.accent_color[:3], opacity), t='in_quad', duration = each_color_transition_duration)
         anim += Animation(md_bg_color = self.md_bg_color, t='in_quad', duration = each_color_transition_duration*1.2)
         anim.start(self)
-        print(f"Animating...\nself.section_name -> {self.section_name}\nself.setting_name -> {self.setting_name}")
