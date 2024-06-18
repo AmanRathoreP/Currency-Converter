@@ -1,6 +1,7 @@
 import os
 from PIL import Image
 from datetime import datetime
+import json
 
 print("Converting PNG to ico for app icon...")
 Image.open(os.path.join("assets", "icons", "work-in-progress.png")).save(os.path.join("assets", "icons", "work-in-progress.ico"))
@@ -92,7 +93,31 @@ if __name__ == "__main__":
         if cli_arg == "--hide-console" or cli_arg == "-hc":
             print("Setting hide_console to hide-early")
             spec_template = spec_template.replace("hide_console=None,", "hide_console=\'hide-early\',")
-        if cli_arg == "--onedir" or cli_arg == "-od":
+       
+        elif cli_arg == "--reset-config" or cli_arg == "-rc":
+            print("Resetting app settings to default settings")
+
+            #* another workaround is to delete the currency.ini file, as application will automatically create it
+            with open("available_options_for_each_setting.json", 'r') as json_file:
+                json_data = json.load(json_file)
+                defaults_data_json = {}
+                for setting in json_data:
+                    __setting_default_data_dict = {}
+                    for sub_setting in json_data[setting]["data"]:
+                        try:
+                            __setting_default_data_dict[sub_setting] = json_data[setting]["data"][sub_setting]["default"]
+                        except:
+                            print(f"No default(s) for \"{setting}\" -> \"{sub_setting}\" found.")
+                    defaults_data_json[setting] = __setting_default_data_dict
+
+            with open("currency.ini", 'w') as config_file:
+                for section, defaults in defaults_data_json.items():
+                    config_file.write('[' + section + ']' + '\n')
+                    for sub_setting_name, default_value in defaults.items():
+                        config_file.write(sub_setting_name + " = " + default_value + '\n')
+                    config_file.write('\n')
+
+        elif cli_arg == "--onedir" or cli_arg == "-od":
             print("Creating one directory exe")
             spec_template = spec_template.replace("    a.binaries,\n    a.datas,\n    [],", "\t[],\t\n\texclude_binaries=True,")
             spec_template = spec_template.replace("    upx_exclude=[],\n    runtime_tmpdir=None,\n", '')
@@ -110,6 +135,7 @@ if __name__ == "__main__":
     files = get_files_name_with_particular_extensions([os.path.join('.', "src")], ["kv"])
     files.extend(get_files_name_with_particular_extensions([os.path.join('.', "assets")], ["png", "jpg", "svg", "jpeg", "bmp"]))
     files.extend(get_files_name_with_particular_extensions([os.path.join('.')], ["json"], search_subdirs = False))
+    files.extend(get_files_name_with_particular_extensions([os.path.join('.')], ["ini"], search_subdirs = False)) # app settings file
     for file_name in files:
         datas.append((file_name, os.path.dirname(file_name)))
 
