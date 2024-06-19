@@ -63,7 +63,11 @@ class SettingsItem(MDCard, ButtonBehavior, searchBackend):
             search_info_card.ripple_behavior = True
             search_info_card.radius = dp(0)
             running_app = MDApp.get_running_app()
-            search_info_card.on_release = lambda __setting_name = setting_name, : running_app.settings.navigate_to_setting(self.settings_section_name, __setting_name)
+            search_info_card.on_release = lambda __setting_name = setting_name:(
+                running_app.settings.navigate_to_setting(self.settings_section_name, __setting_name),
+                self.show_ripple()
+                )
+            search_info_card.on_press = lambda: self.show_ripple(False)
             search_info_card.md_bg_color = (*running_app.theme_cls.accent_color[:3], 0.3 * 2)
             search_info_card.ripple_color = (*running_app.theme_cls.primary_color[:3], 0.25 * 2)
 
@@ -79,3 +83,6 @@ class SettingsItem(MDCard, ButtonBehavior, searchBackend):
             self.ids.setting_infos.add_widget(search_info_card)
 
             current_index_of_string_to_show += 1
+    
+    def show_ripple(self, show_ripple: bool = True):
+        self.ripple_behavior = show_ripple
