@@ -46,7 +46,9 @@ class subSettingsTemplate(MDScreen):
                 sub_setting.animate_for_easy_navigation()
 
     def add_info_label(self, setting_name_in_settings_properties_json_file, **kwargs):
-        info_label = infoLabel(None, None, None,
+        info_label = infoLabel(None,
+                             self.setting_section_name, #* used to highlight the setting/info after search for setting
+                             setting_name_in_settings_properties_json_file, #* used to highlight the setting/info after search for setting
                              self.setting_properties["data"][setting_name_in_settings_properties_json_file]["title"],
                              self.setting_properties["data"][setting_name_in_settings_properties_json_file]["description"],
                              **kwargs)

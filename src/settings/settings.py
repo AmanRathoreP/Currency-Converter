@@ -41,4 +41,7 @@ class settingsScreen(MDScreen):
             return
         for setting_screen in self.screen_manager.children:
             if setting_screen.name == setting_section_name:
-                setting_screen.highlight_setting(setting_section_name, setting_name)
+                if "!alternate_search_string_of_sub_setting!" == setting_name[:len("!alternate_search_string_of_sub_setting!")] and setting_screen.name == setting_section_name:
+                    setting_screen.highlight_setting(setting_section_name, setting_name[len("!alternate_search_string_of_sub_setting!"):])
+                else:
+                    setting_screen.highlight_setting(setting_section_name, setting_name)
