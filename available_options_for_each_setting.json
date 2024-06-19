@@ -106,18 +106,33 @@
             "test setting 1": {
                 "options": [],
                 "config file's setting name": "",
-                "title": "Title for test setting 2",
+                "title": "Title for test setting 1",
                 "description": "check for setting 1 of currencies to include",
-                "alternate search strings": [],
-                "type": "info label"
+                "alternate search strings": [
+                    "available currencies",
+                    "available currency"
+                ],
+                "type": "info label",
+                "tab": {
+                    "id": "available currencies by default",
+                    "name": "Available Currencies"
+                }
             },
             "test setting 2": {
                 "options": [],
                 "config file's setting name": "",
                 "title": "Title for test setting 2",
                 "description": "check for setting 2 of currencies to include",
-                "alternate search strings": [],
-                "type": "info label"
+                "alternate search strings": [
+                    "custom currency",
+                    "custom currencies"
+                ],
+                "type": "info label",
+                "tab": {
+                    "id": "custom currencies",
+                    "name": "Custom Currencies",
+                    "icon": "cash"
+                }
             }
         }
     },
