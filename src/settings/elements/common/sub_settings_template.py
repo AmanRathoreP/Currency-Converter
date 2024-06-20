@@ -92,8 +92,9 @@ class subSettingsTemplate(MDScreen):
 
     def highlight_setting(self, section_name: str, setting_name: str):
         if self.show_tabs_view:
-            # todo switch to tab with that particular setting
-            pass
+            for tab in self.tabs_instances:
+                if self.setting_properties["data"][setting_name]["tab"]["id"] == tab.id:
+                    self.ids.tabs.carousel.load_slide(tab)
         for sub_setting in self.sub_settings_list:
             if (sub_setting.section_name == section_name) and (sub_setting.setting_name == setting_name):
                 sub_setting.animate_for_easy_navigation()
