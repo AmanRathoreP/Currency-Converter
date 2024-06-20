@@ -1,3 +1,18 @@
+if __name__ == "__main__":
+    from sys import argv as cli_args
+    print(cli_args)
+
+    if len(cli_args) == 2 and (cli_args[1] == "--help" or cli_args[1] == "-h"):
+        from sys import exit
+        #* show help to user
+        print("""Below are some valid available cli options
+--hide-console/-hc To force no creation of an standalone exe instead forcing creation of multiple files along with an exe, in order for user to run app. This is useful for fast loading of app and efficient updating of app but it's downside is it's large size as compared to standalone exe.
+--hide-console/-hc To disable console while running the executable.
+--reset-config/-rc To make sure that config file has only and only defaults which are available in "available_options_for_each_setting".json file.
+--help/-h To display docs for cli args of the spec file generator.
+              """)
+        exit()
+
 import os
 from PIL import Image
 from datetime import datetime
