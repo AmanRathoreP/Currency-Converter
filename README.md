@@ -60,6 +60,7 @@ Run the below commands one by one
   python generate_spec_for_exe.py --onedir --reset-config
   ```
   > Note that you can also use command line args like `--onedir`/`-od`, `--hide-console`/`-hc`.
+    * `--help`/`-h` To display available cli args for `generate_spec_for_exe.py` along with their use(s).
     * `--onedir`/`-od` means that instead of an standalone exe user will be required to have bunch of file in order to run the app.
     * `--hide-console`/`-hc` means that no console will be displayed to the user after exe is created.
     * `--reset-config`/`-rc` make sure that config file has only and only defaults set by user in `available_options_for_each_setting.json` file.
