@@ -1,5 +1,6 @@
 from src.settings.elements.common.combobox_template import comboBox
 from src.settings.elements.common.info_label_template import infoLabel
+from src.settings.elements.common.checkbox_template import customCheckBox
 
 import os
 import json
@@ -139,6 +140,12 @@ class subSettingsTemplate(MDScreen):
                 self.add_combo_box(setting_name_in_settings_properties_json_file, **kwargs)
             elif self.setting_properties["data"][setting_name_in_settings_properties_json_file]["type"] == "info label":
                 self.add_info_label(setting_name_in_settings_properties_json_file, **kwargs)
+            elif self.setting_properties["data"][setting_name_in_settings_properties_json_file]["type"] == "checkbox-boolean":
+                self.add_checkbox(setting_name_in_settings_properties_json_file, check_box_type = "boolean", **kwargs)
+            elif self.setting_properties["data"][setting_name_in_settings_properties_json_file]["type"] == "checkbox-multiple-options-select":
+                self.add_checkbox(setting_name_in_settings_properties_json_file, check_box_type = "multiple-options-select", **kwargs)
+            elif self.setting_properties["data"][setting_name_in_settings_properties_json_file]["type"] == "checkbox-single-option-select":
+                self.add_checkbox(setting_name_in_settings_properties_json_file, check_box_type = "single-option-select", **kwargs)
             else:
                 settings_not_added.append(setting_name_in_settings_properties_json_file)
         
@@ -152,3 +159,19 @@ class subSettingsTemplate(MDScreen):
             for tab in self.tabs_instances:
                 if tab.id == tab_id:
                     tab.ids.sub_settings.add_widget(element)
+
+    def add_checkbox(self, setting_name_in_settings_properties_json_file, check_box_type:str, **kwargs):
+        check_box = customCheckBox(
+            self.config,
+            self.setting_section_name,
+            self.setting_properties["data"][setting_name_in_settings_properties_json_file]["config file's setting name"],
+            self.setting_properties["data"][setting_name_in_settings_properties_json_file]["title"],
+            check_box_type,
+            **kwargs
+            )
+        
+        self.add_element_to_settings_screen(
+            check_box,
+            self.setting_properties["data"][setting_name_in_settings_properties_json_file]["tab"]["id"] if "tab" in self.setting_properties["data"][setting_name_in_settings_properties_json_file].keys() else None)
+        
+        return self

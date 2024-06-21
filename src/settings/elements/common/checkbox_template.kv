@@ -1,0 +1,18 @@
+<customCheckBox>:
+    size_hint_y:None
+    height:dp(60)
+    padding:dp(10)
+    spacing:dp(10)
+    ripple_behavior: True
+    md_bg_color: (*app.theme_cls.primary_color[:3], 0.3)
+    ripple_color: (*app.theme_cls.accent_color[:3], 0.25)
+
+    MDLabel:
+        id: label_option_name
+        font_size: 26
+
+    MDCheckbox:
+        id: boolean
+        size_hint: None, None
+        pos_hint: {"center_x": .5, "center_y": .5}
+        on_release: root.on_box_clicked()

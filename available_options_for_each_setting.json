@@ -90,6 +90,17 @@
                 "alternate search strings": [],
                 "type": "combo box",
                 "default": "Light"
+            },
+            "affect-icons": {
+                "options": [],
+                "config file's setting name": "affect-icons",
+                "title": "Make theme affect icons",
+                "alternate search strings": [
+                    "icons",
+                    "images"
+                ],
+                "type": "checkbox-boolean",
+                "default": "False"
             }
         }
     },
