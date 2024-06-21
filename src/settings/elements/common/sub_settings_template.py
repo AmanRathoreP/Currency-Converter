@@ -90,6 +90,8 @@ class subSettingsTemplate(MDScreen):
         self.add_element_to_settings_screen(combo_box,
                                             self.setting_properties["data"][setting_name_in_settings_properties_json_file]["tab"]["id"] if "tab" in self.setting_properties["data"][setting_name_in_settings_properties_json_file].keys() else None)
 
+        return self
+
     def highlight_setting(self, section_name: str, setting_name: str):
         if self.show_tabs_view:
             for tab in self.tabs_instances:
