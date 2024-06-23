@@ -71,7 +71,7 @@ Run the below commands one by one
 
 # Contributing [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](issues.md)
 
-Thank you for considering contributing to Computer Based Test Emulator
+Thank you for considering contributing to Currency Converter
 
 First note we have a code of conduct, please follow it in all your interactions with the program files.
 
