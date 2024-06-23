@@ -167,6 +167,7 @@ class subSettingsTemplate(MDScreen):
             self.setting_properties["data"][setting_name_in_settings_properties_json_file]["config file's setting name"],
             self.setting_properties["data"][setting_name_in_settings_properties_json_file]["title"],
             check_box_type,
+            self.setting_properties["data"][setting_name_in_settings_properties_json_file]["options"],
             **kwargs
             )
         

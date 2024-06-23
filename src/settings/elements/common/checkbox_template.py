@@ -4,11 +4,23 @@ import os
 
 from kivy.lang import Builder
 from kivy.config import ConfigParser
+from kivy.properties import StringProperty
+from kivy.metrics import dp
 from kivymd.app import MDApp
+from kivymd.uix.boxlayout import MDBoxLayout
 
-kivy_design_files = ["checkbox_template"]
+kivy_design_files = ["checkbox_template", "check_item"]
 for kv_file in kivy_design_files:
     Builder.load_file(os.path.join(os.path.dirname(os.path.realpath( __file__ )), kv_file + ".kv"))
+
+class CheckItem(MDBoxLayout):
+    text = StringProperty()
+    group = StringProperty()
+
+    def __init__(self, text:str, group:str, **kwargs):
+        super(CheckItem, self).__init__(**kwargs)
+        self.text = text
+        self.group = group
 
 class customCheckBox(individualSettingBaseClass):
     """
@@ -41,14 +53,19 @@ class customCheckBox(individualSettingBaseClass):
         self.ids.label_option_name.text = self.title
 
         if self.check_box_type == "boolean":
-            #todo only show boolean type of check box
             self.ids.boolean.state = "down" if self.config[self.section_name][self.setting_name] == "True" else "normal"
+            self.remove_widget(self.ids.check_box_with_parent_container)
         elif self.check_box_type == "multiple-options-select":
-            #todo only show multiple-options-select type of check box
-            pass
+            #todo
+            self.remove_widget(self.ids.boolean)
         elif self.check_box_type == "single-option-select":
-            #todo only show single-option-select type of check box
-            pass
+            self.remove_widget(self.ids.boolean)
+            self.ids.label_option_name.padding = [dp(15), dp(40), 0, 0] # [left, top, right, bottom]
+            self.adaptive_height = True
+            self.orientation = "vertical"
+            for option in self.options:
+                check_item = CheckItem(option, "group")
+                self.ids.check_box_with_parent_container.add_widget(check_item)
         else:
             #todo throw exception
             pass
@@ -60,3 +77,6 @@ class customCheckBox(individualSettingBaseClass):
         self.config[self.section_name][self.setting_name] = __setting_value_to_write
         self.config.write()
         MDApp.get_running_app().apply_settings_to_app()
+    
+    def show_ripple(self, show_ripple: bool = True):
+        self.ripple_behavior = show_ripple
