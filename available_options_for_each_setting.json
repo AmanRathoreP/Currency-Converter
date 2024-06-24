@@ -159,7 +159,7 @@
                     "include"
                 ],
                 "type": "checkbox-multiple-options-select",
-                "all_options_select_title": "Select All",
+                "all_options_select_title": "Select All Currencies",
                 "default": [
                     "INR",
                     "YEN",

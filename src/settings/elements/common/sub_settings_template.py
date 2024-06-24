@@ -143,7 +143,13 @@ class subSettingsTemplate(MDScreen):
             elif self.setting_properties["data"][setting_name_in_settings_properties_json_file]["type"] == "checkbox-boolean":
                 self.add_checkbox(setting_name_in_settings_properties_json_file, check_box_type = "boolean", **kwargs)
             elif self.setting_properties["data"][setting_name_in_settings_properties_json_file]["type"] == "checkbox-multiple-options-select":
-                self.add_checkbox(setting_name_in_settings_properties_json_file, check_box_type = "multiple-options-select", **kwargs)
+                self.add_checkbox(
+                    setting_name_in_settings_properties_json_file,
+                    check_box_type = "multiple-options-select",
+                    all_options_select_title = self.setting_properties["data"][setting_name_in_settings_properties_json_file]["all_options_select_title"] if "all_options_select_title" in self.setting_properties["data"][setting_name_in_settings_properties_json_file] else "Select All",
+                    **kwargs
+                )
+
             elif self.setting_properties["data"][setting_name_in_settings_properties_json_file]["type"] == "checkbox-single-option-select":
                 self.add_checkbox(setting_name_in_settings_properties_json_file, check_box_type = "single-option-select", **kwargs)
             else:

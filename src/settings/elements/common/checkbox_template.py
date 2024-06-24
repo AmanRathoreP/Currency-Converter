@@ -33,7 +33,7 @@ class customCheckBox(individualSettingBaseClass):
     check_box_type:str = ""
     options = []
 
-    def __init__(self, config: ConfigParser, section_name, setting_name, title, check_box_type:str, options = None, **kwargs):
+    def __init__(self, config: ConfigParser, section_name, setting_name, title, check_box_type:str, options = None, all_options_select_title:str = "Select All", **kwargs):
         """
         Initialize the customCheckBox instance.
 
@@ -51,13 +51,22 @@ class customCheckBox(individualSettingBaseClass):
         self.options = options
         self.check_box_type = check_box_type
         self.ids.label_option_name.text = self.title
+        self.all_options_select_title = all_options_select_title
 
         if self.check_box_type == "boolean":
             self.ids.boolean.state = "down" if self.config[self.section_name][self.setting_name] == "True" else "normal"
             self.remove_widget(self.ids.check_box_with_parent_container)
         elif self.check_box_type == "multiple-options-select":
-            #todo
             self.remove_widget(self.ids.boolean)
+            self.ids.label_option_name.padding = [dp(15), dp(40), 0, 0] # [left, top, right, bottom]
+            self.adaptive_height = True
+            self.orientation = "vertical"
+            parent_check_item = CheckItem(self.all_options_select_title, "root")
+            self.ids.check_box_with_parent_container.add_widget(parent_check_item)
+            for option in self.options:
+                check_item = CheckItem(option, "child")
+                check_item.padding = [dp(40), 0, 0, 0] # [left, top, right, bottom]
+                self.ids.check_box_with_parent_container.add_widget(check_item)
         elif self.check_box_type == "single-option-select":
             self.remove_widget(self.ids.boolean)
             self.ids.label_option_name.padding = [dp(15), dp(40), 0, 0] # [left, top, right, bottom]
