@@ -1,5 +1,6 @@
 from src.settings.elements.common.sub_settings_template import subSettingsTemplate
 from src.settings.settings_screen import settingsDefaultScreen
+from src.settings.elements.sub_settings.currencies_to_include import Currency
 
 from kivy.config import ConfigParser
 from kivymd.uix.screen import MDScreen
@@ -26,7 +27,7 @@ class settingsScreen(MDScreen):
         default_settings_screen = settingsDefaultScreen(config, name = "default_settings_screen")
         self.screen_manager.add_widget(default_settings_screen)
 
-        self.screen_manager.add_widget(subSettingsTemplate(self.config, setting_section_name = "currencies to include").add_all_possible_settings()[0])
+        self.screen_manager.add_widget(Currency(self.config))
         self.screen_manager.add_widget(subSettingsTemplate(self.config, setting_section_name = "format numbers' looks").add_all_possible_settings()[0])
         self.screen_manager.add_widget(subSettingsTemplate(self.config, setting_section_name = "look and feel").add_all_possible_settings()[0])
         self.screen_manager.add_widget(subSettingsTemplate(self.config, setting_section_name = "sync").add_all_possible_settings()[0])
