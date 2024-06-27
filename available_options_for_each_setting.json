@@ -114,79 +114,30 @@
             "Cash"
         ],
         "data": {
-            "test setting 1": {
+            "active-non-custom-currencies": {
                 "options": [],
-                "config file's setting name": "",
-                "title": "Title for test setting 1",
-                "description": "check for setting 1 of currencies to include",
-                "alternate search strings": [
-                    "available currencies",
-                    "available currency"
+                "alternate search strings": [],
+                "config file's setting name": "active-non-custom-currencies",
+                "type": "NaN",
+                "default": [
+                    "INR",
+                    "JPY",
+                    "EUR",
+                    "USD"
                 ],
-                "type": "info label",
                 "tab": {
                     "id": "available currencies by default",
                     "name": "Available Currencies"
                 }
             },
-            "test setting 2": {
+            "NaN": {
                 "options": [],
-                "config file's setting name": "",
-                "title": "Title for test setting 2",
-                "description": "check for setting 2 of currencies to include",
-                "alternate search strings": [
-                    "custom currency",
-                    "custom currencies"
-                ],
-                "type": "info label",
+                "alternate search strings": [],
+                "type": "NaN",
                 "tab": {
                     "id": "custom currencies",
                     "name": "Custom Currencies",
                     "icon": "cash"
-                }
-            },
-            "TEST-currencies-to-include": {
-                "options": [
-                    "INR",
-                    "USD",
-                    "YEN",
-                    "EURO"
-                ],
-                "config file's setting name": "TEST-currencies-to-include",
-                "title": "Currencies to include",
-                "alternate search strings": [
-                    "checkbox-multiple-options-select",
-                    "include"
-                ],
-                "type": "checkbox-multiple-options-select",
-                "all_options_select_title": "Select All Currencies",
-                "default": [
-                    "INR",
-                    "YEN",
-                    "EURO"
-                ],
-                "tab": {
-                    "id": "available currencies by default",
-                    "name": "Available Currencies"
-                }
-            },
-            "TEST-radio-options": {
-                "options": [
-                    "Option 1",
-                    "Option 2",
-                    "Option 3",
-                    "This is very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very long option"
-                ],
-                "config file's setting name": "TEST-radio-options",
-                "title": "Select one",
-                "alternate search strings": [
-                    "checkbox-single-option-select"
-                ],
-                "type": "checkbox-single-option-select",
-                "default": "Option 3",
-                "tab": {
-                    "id": "available currencies by default",
-                    "name": "Available Currencies"
                 }
             }
         }

@@ -54,7 +54,7 @@ class customCheckBox(individualSettingBaseClass):
         self.all_options_select_title = all_options_select_title
 
         if self.check_box_type == "boolean":
-            self.ids.boolean.state = "down" if self.config[self.section_name][self.setting_name] == "True" else "normal"
+            self.ids.boolean.state = "down" if self.previous_boolean_state_of_check_box == "True" else "normal"
             self.remove_widget(self.ids.check_box_with_parent_container)
         elif self.check_box_type == "multiple-options-select":
             self.remove_widget(self.ids.boolean)
@@ -89,3 +89,7 @@ class customCheckBox(individualSettingBaseClass):
     
     def show_ripple(self, show_ripple: bool = True):
         self.ripple_behavior = show_ripple
+    
+    @property
+    def previous_boolean_state_of_check_box(self):
+        self.config[self.section_name][self.setting_name]
