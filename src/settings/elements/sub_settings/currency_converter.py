@@ -124,7 +124,12 @@ class ExchangeRates:
         currencies = {code: rate for code, rate in self.rates.items() if rate['type'] == 'fiat'}
         cryptos = {code: rate for code, rate in self.rates.items() if rate['type'] == 'crypto'}
         commodities = {code: rate for code, rate in self.rates.items() if rate['type'] == 'commodity'}
-        return {'currencies': currencies, 'cryptos': cryptos, 'commodities': commodities}
+
+        return {
+            'currencies': dict(sorted(currencies.items())),
+            'cryptos': dict(sorted(cryptos.items())),
+            'commodities': dict(sorted(commodities.items()))
+        }
 
 if __name__ == "__main__":
     exchange = ExchangeRates()
