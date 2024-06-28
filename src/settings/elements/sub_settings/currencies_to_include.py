@@ -12,7 +12,12 @@ class Currency(subSettingsTemplate):
         self.clear_all_available_settings()
 
         try:
-            er = ExchangeRates(resource_find("exchange_rates.json"))
+            if resource_find("exchange_rates.json") != None:
+                er = ExchangeRates(resource_find("exchange_rates.json"))
+            else:
+                open("exchange_rates.json", 'a').close()
+                er = ExchangeRates(resource_find("exchange_rates.json"))
+
         except RuntimeError as e:
             # todo so info to user
             print(e)
