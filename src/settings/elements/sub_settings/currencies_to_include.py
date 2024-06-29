@@ -10,7 +10,9 @@ class Currency(subSettingsTemplate):
         super(Currency, self).__init__(config, "currencies to include", **kwargs)
         
         self.clear_all_available_settings()
+        self.add_all_currencies_to_settings(**kwargs)
 
+    def add_all_currencies_to_settings(self, **kwargs):
         try:
             if resource_find("exchange_rates.json") != None:
                 er = ExchangeRates(resource_find("exchange_rates.json"))
