@@ -129,7 +129,7 @@ if __name__ == "__main__":
                 for section, defaults in defaults_data_json.items():
                     config_file.write('[' + section + ']' + '\n')
                     for sub_setting_name, default_value in defaults.items():
-                        config_file.write(sub_setting_name + " = " + default_value + '\n')
+                        config_file.write(sub_setting_name + " = " + str(default_value) + '\n')
                     config_file.write('\n')
 
         elif cli_arg == "--onedir" or cli_arg == "-od":
