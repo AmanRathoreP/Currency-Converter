@@ -21,14 +21,21 @@ class ExchangeRates:
         get_lists(): Returns a dictionary with lists of fiat currencies, cryptocurrencies, and commodities along with their values.
     """
 
-    def __init__(self, data_file:str):
+    def __init__(self, data_file:str, load_from_file:bool = False):
         """
         Initializes the ExchangeRates class, fetches the exchange rates, and saves them to a JSON file.
         
         Parameters:
-            data_file (str): The name of the JSON file to save exchange rates data. Default is 'exchange_rates.json'.
+            data_file (str): The name of the JSON file(with location) to save exchange rates data.
+            load_from_file (str): Load data from json file or load it from api call. Default is False.
         """
         self.data_file = data_file
+
+        if load_from_file:
+            with open(self.data_file, 'r') as json_file_with_exchange_rates:
+                self.rates = json.load(json_file_with_exchange_rates)
+            return
+        
         self.rates = self.get_exchange_rates()
         self.save_to_json()
 
