@@ -21,7 +21,7 @@ class Currency(subSettingsTemplate):
                 er = ExchangeRates(resource_find("exchange_rates.json"))
 
         except RuntimeError as e:
-            # todo so info to user
+            # todo show info to user
             print(e)
         
         curr_list = er.get_lists()
