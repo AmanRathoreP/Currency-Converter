@@ -12,11 +12,13 @@ for kv_file in kivy_design_files:
     Builder.load_file(os.path.join(os.path.dirname(os.path.realpath( __file__ )), kv_file + ".kv"))
 
 class settingsDefaultScreen(MDScreen):
+    show_loading_spinner:bool = True
+    individual_settings_row = {}
+
     def __init__(self, config: ConfigParser, **kwargs):
         super(settingsDefaultScreen, self).__init__(**kwargs)
         self.config = config
 
-        self.individual_settings_row = {}
         for individual_settings_row_section_name in ["currencies to include", "format numbers' looks", "look and feel", "sync", "about"]:
             self.individual_settings_row[individual_settings_row_section_name] = SettingsItem(individual_settings_row_section_name)
             self.ids.sub_settings_list.add_widget(self.individual_settings_row[individual_settings_row_section_name])
@@ -57,3 +59,9 @@ class settingsDefaultScreen(MDScreen):
             toast("No settings found!")
             for setting_item_str in self.individual_settings_row:
                 self.ids.sub_settings_list.add_widget(self.individual_settings_row[setting_item_str])
+
+    def show_loading_screen(self, show_settings:bool = True):
+        self.ids.search_field.disabled = show_settings
+        for __setting_row in self.individual_settings_row:
+            self.individual_settings_row[__setting_row].disable_navigation(show_settings)
+        self.ids.loading_spinner.active = show_settings

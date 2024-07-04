@@ -8,6 +8,8 @@ from kivymd.uix.screenmanager import MDScreenManager
 from kivymd.uix.transition.transition import MDSwapTransition
 
 class settingsScreen(MDScreen):
+    settings_ready_to_use:bool = False
+
     def show_settings_screen(self):
         self.screen_manager.current = "default_settings_screen"
     
@@ -27,11 +29,7 @@ class settingsScreen(MDScreen):
         default_settings_screen = settingsDefaultScreen(config, name = "default_settings_screen")
         self.screen_manager.add_widget(default_settings_screen)
 
-        self.screen_manager.add_widget(Currency(self.config))
-        self.screen_manager.add_widget(subSettingsTemplate(self.config, setting_section_name = "format numbers' looks").add_all_possible_settings()[0])
-        self.screen_manager.add_widget(subSettingsTemplate(self.config, setting_section_name = "look and feel").add_all_possible_settings()[0])
-        self.screen_manager.add_widget(subSettingsTemplate(self.config, setting_section_name = "sync").add_all_possible_settings()[0])
-        self.screen_manager.add_widget(subSettingsTemplate(self.config, setting_section_name = "about").add_all_possible_settings()[0])
+        default_settings_screen.show_loading_screen()
 
         self.add_widget(self.screen_manager)
 
@@ -46,3 +44,21 @@ class settingsScreen(MDScreen):
                     setting_screen.highlight_setting(setting_section_name, setting_name[len("!alternate_search_string_of_sub_setting!"):])
                 else:
                     setting_screen.highlight_setting(setting_section_name, setting_name)
+
+    def create_settings(self):
+        '''
+        Creation of settings stuff takes time. That's why one will call this function in a side thread rather than main thread.
+        '''
+        
+        if self.settings_ready_to_use:
+            return
+        
+        self.screen_manager.add_widget(Currency(self.config))
+        self.screen_manager.add_widget(subSettingsTemplate(self.config, setting_section_name = "format numbers' looks").add_all_possible_settings()[0])
+        self.screen_manager.add_widget(subSettingsTemplate(self.config, setting_section_name = "look and feel").add_all_possible_settings()[0])
+        self.screen_manager.add_widget(subSettingsTemplate(self.config, setting_section_name = "sync").add_all_possible_settings()[0])
+        self.screen_manager.add_widget(subSettingsTemplate(self.config, setting_section_name = "about").add_all_possible_settings()[0])
+
+        self.screen_manager.get_screen("default_settings_screen").show_loading_screen(False)
+
+        self.settings_ready_to_use = True

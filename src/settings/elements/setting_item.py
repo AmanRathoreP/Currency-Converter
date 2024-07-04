@@ -86,3 +86,6 @@ class SettingsItem(MDCard, ButtonBehavior, searchBackend):
     
     def show_ripple(self, show_ripple: bool = True):
         self.ripple_behavior = show_ripple
+
+    def disable_navigation(self, disable:bool = True):
+        self.disabled = disable

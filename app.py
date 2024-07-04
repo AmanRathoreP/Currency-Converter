@@ -67,6 +67,7 @@ class currencyApp(MDApp):
 		self.settings.show_settings_screen_instantly()
 		self.screen_manager.transition.direction = "left"
 		self.screen_manager.current = "settings"
+		self.settings.create_settings() #todo run it parallel so that user can see loading stuff
 
 	def navigate_to_home(self):
 		self.screen_manager.transition.direction = "right"
