@@ -193,4 +193,5 @@ pyrightconfig.json
 python_virtual_environment_for_app/*
 *.ini
 # ico files are stored as png, svg, jpeg etc. and converted to ico during build process
-*.ico 
+*.ico
+exchange_rates.json
