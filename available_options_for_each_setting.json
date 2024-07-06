@@ -152,27 +152,31 @@
             "Numbers"
         ],
         "data": {
-            "test setting 1": {
-                "options": [],
-                "config file's setting name": "",
-                "title": "test setting 1's title",
-                "description": "check for setting 1 of format numbers' looks",
-                "alternate search strings": [
-                    "check 1",
-                    "test 2"
+            "number-format-system": {
+                "options": [
+                    "International Number System",
+                    "Indian Number System"
                 ],
-                "type": "info label"
+                "config file's setting name": "number-format-system",
+                "title": "Number System(Format)",
+                "alternate search strings": [
+                    "System",
+                    "Format"
+                ],
+                "type": "combo box",
+                "default": "International Number System"
             },
-            "test setting 2": {
+            "smart-formatting": {
                 "options": [],
-                "config file's setting name": "",
-                "title": "test setting 2's title",
-                "description": "check for setting 2 of format numbers' looks",
+                "config file's setting name": "smart-formatting",
+                "title": "Smart Formatting",
                 "alternate search strings": [
-                    "check 2",
-                    "test 2"
+                    "smart formatting",
+                    "smart",
+                    "formatting"
                 ],
-                "type": "info label"
+                "type": "checkbox-boolean",
+                "default": "False"
             }
         }
     },
