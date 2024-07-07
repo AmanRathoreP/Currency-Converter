@@ -1,0 +1,32 @@
+<IndividualCurrencyItem>:
+    icon:"assets\icons\work-in-progress.png"
+    text:"Sample currency"
+    name:"INR"
+    size_hint_y: None
+    height: dp(50)
+    padding: [dp(10), 0, dp(10), 0] # [left, top, right, bottom]
+    ripple_behavior: True
+    md_bg_color: (*app.theme_cls.primary_color[:3], 0.3)
+    ripple_color: (*app.theme_cls.accent_color[:3], 0.25)
+
+    MDLabel:
+        text: root.text
+        font_style: "H6"
+
+    Widget:
+        size_hint_x: 1  # This will push the Image to the right
+
+    MDLabel:
+        text: root.name + "  "
+        font_style: "H6"
+        valign: 'center'
+        halign: 'right'
+        text_size: self.width, None
+        size_hint_x: None
+        # width: self.texture_size[0]  # Adjust width to fit text
+    
+    Image:
+        size_hint: None, None
+        size: [root.height * 0.75, root.height * 0.75]  # Adjust size as needed
+        source: root.icon
+        pos_hint: {'center_y': 0.5}  # Center the image vertically

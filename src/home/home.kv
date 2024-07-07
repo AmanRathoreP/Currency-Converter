@@ -1,25 +1,31 @@
 <homeScreen>:
     MDTopAppBar:
-        title: "Home Screen of Currency Converter"
+        id: main_app_bar
+        title: "Write value to convert here (along with mathematical symbols)"
         pos_hint: {"top": 1}
         elevation: 0
         right_action_items: [["assets/icons/settings.png", lambda x: app.navigate_to_settings()]]
+    MDTopAppBar:
+        id: secondary_app_bar
+        title: "Final Vaule to conver will be displayed here"
+        pos_hint: {"top": (self.parent.height - main_app_bar.height)/self.parent.height}
+        elevation: 0
+        left_action_items: [["assets/icons/work-in-progress.png", lambda x: print((self.parent.height - main_app_bar.height)/self.parent.height)]]
 
     MDBoxLayout:
         orientation: 'vertical'
-        padding: 20
+        padding: [dp(5), 0, 0, 0] #* [left, top, right, bottom]
         spacing: 20
 
-        MDIcon:
-            icon:"assets/icons/work-in-progress.png"
-            pos_hint: {"center_x": 0.5, "center_y": 0.1}
-            font_size : 300
+        ScrollView:
+            size_hint: 1, None
+            height: root.height - main_app_bar.height - secondary_app_bar.height - dp(20)
+            pos_hint: {"top": (root.height - (main_app_bar.height + secondary_app_bar.height))/root.height}
 
-        MDLabel:
-            text: "Home Screen of Currency Converter"
-            halign: 'center'
-            font_size: 44
-
-        MDRaisedButton:
-            text: "Click Me"
-            pos_hint: {"center_x": 0.5}
+            MDBoxLayout:
+                id: currencies_panel
+                orientation: "vertical"
+                padding: [dp(10), 0, dp(10), 0]
+                spacing: 20
+                size_hint_y: None
+                height: self.minimum_height
