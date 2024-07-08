@@ -155,7 +155,8 @@
             "number-format-system": {
                 "options": [
                     "International Number System",
-                    "Indian Number System"
+                    "Indian Number System",
+                    "Chinese Number System"
                 ],
                 "config file's setting name": "number-format-system",
                 "title": "Number System(Format)",
