@@ -195,3 +195,4 @@ python_virtual_environment_for_app/*
 # ico files are stored as png, svg, jpeg etc. and converted to ico during build process
 *.ico
 exchange_rates.json
+vendor/* 

@@ -1,0 +1,4 @@
+[submodule "format_currency"]
+	# git submodule add --force --name format_currency https://github.com/AmanRathoreP/format-currency vendor/format_currency
+	path = vendor/format_currency
+	url = https://github.com/AmanRathoreP/format-currency
