@@ -10,6 +10,7 @@
     ripple_color: (*app.theme_cls.accent_color[:3], 0.25)
 
     MDLabel:
+        id: currency_text
         text: root.text
         font_style: "H6"
 
@@ -17,6 +18,7 @@
         size_hint_x: 1  # This will push the Image to the right
 
     MDLabel:
+        id: currency_name
         text: root.name + "  "
         font_style: "H6"
         valign: 'center'
@@ -26,6 +28,7 @@
         # width: self.texture_size[0]  # Adjust width to fit text
     
     Image:
+        id: currency_image
         size_hint: None, None
         size: [root.height * 0.75, root.height * 0.75]  # Adjust size as needed
         source: root.icon
