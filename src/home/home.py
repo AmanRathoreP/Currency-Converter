@@ -17,6 +17,7 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen
 from kivy.config import ConfigParser
 from kivy.metrics import dp
+from kivy.resources import resource_find
 from kivymd.app import MDApp
 from kivymd.uix.card import MDCard
 from kivymd.uix.button import MDRaisedButton
@@ -37,7 +38,7 @@ class homeScreen(Screen):
         self.__load_self_configuration_data()
 
         if __name__ == "__main__":
-            currencies_to_add = ['INR', 'JPY', 'EUR', 'USD']
+            currencies_to_add = ['INR', 'JPY', 'SAR', 'USD', 'THB']
         else:
             currencies_to_add = self.config["currencies to include"]["active-non-custom-currencies"].replace('\'', '').replace(' ', '')[1:-1].split(',')
         currencies_to_add.sort()
@@ -96,6 +97,7 @@ class IndividualCurrencyItem(MDCard):
     
     def update_currency_value_to_show(self, text_to_show:str):
         self.ids.currency_text.text = text_to_show
+        self.ids.currency_text.font_name = resource_find("assets/fonts/custom/NotoSans (only certain characters).ttf")
 
 class InputKeyboard(MDCard):
     typed_string:str = ''
