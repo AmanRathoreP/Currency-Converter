@@ -156,7 +156,8 @@
                 "options": [
                     "International Number System",
                     "Indian Number System",
-                    "Chinese Number System"
+                    "Chinese Number System",
+                    "According to Currency"
                 ],
                 "config file's setting name": "number-format-system",
                 "title": "Number System(Format)",
@@ -178,6 +179,32 @@
                 ],
                 "type": "checkbox-boolean",
                 "default": "False"
+            },
+            "decimal-precision": {
+                "options": [
+                    "0",
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7"
+                ],
+                "config file's setting name": "decimal-precision",
+                "title": "Number of Decimal Places",
+                "alternate search strings": [
+                    "Precision",
+                    "accuracy",
+                    "exact",
+                    "exactness",
+                    "Decimal",
+                    "Places",
+                    "float",
+                    "Number"
+                ],
+                "type": "combo box",
+                "default": "2"
             }
         }
     },

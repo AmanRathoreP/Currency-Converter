@@ -34,16 +34,16 @@ class homeScreen(Screen):
         self.config = config
         self.er = ExchangeRates("exchange_rates.json", True)
 
-        value_to_convert = 50
+        self.__load_self_configuration_data()
+
         if __name__ == "__main__":
             currencies_to_add = ['INR', 'JPY', 'EUR', 'USD']
         else:
             currencies_to_add = self.config["currencies to include"]["active-non-custom-currencies"].replace('\'', '').replace(' ', '')[1:-1].split(',')
         currencies_to_add.sort()
         for currency in currencies_to_add:
-            __converted_value = round(self.er.convert_currency(value_to_convert, "USD".lower(), currency.lower()), 2)
             #todo https://github.com/hampusborgos/country-flags
-            self.__add_currency(currency, "assets/icons/work-in-progress.png", f"{format_currency(__converted_value, currency_code = currency)}")
+            self.__add_currency(currency, "assets/icons/work-in-progress.png", '.')
     
         self.add_widget(InputKeyboard(self.on_typed_string_change))
     
@@ -60,12 +60,31 @@ class homeScreen(Screen):
         
         for currency_holder in self.added_currencies_holder:
             try:
-                converted_value_str = format_currency(round(self.er.convert_currency(float(secondary_app_bar_text), "USD".lower(), currency_holder.name.lower()), 2), currency_code = currency_holder.name.lower())
+                converted_value_str = format_currency(round(self.er.convert_currency(float(secondary_app_bar_text), "USD".lower(), currency_holder.name.lower()), self.__decimal_places_to_show), currency_code = currency_holder.name.lower(), number_format_system = self.__number_format_system, smart_number_formatting = self.__smart_formatting, place_currency_symbol_at_end = True, decimal_places = self.__decimal_places_to_show)
             except:
                 converted_value_str: str = "."
             currency_holder.update_currency_value_to_show(converted_value_str)
         self.ids.main_app_bar.title = main_app_bar_text
-        self.ids.secondary_app_bar.title = ("= " + secondary_app_bar_text) if "CHECK INPUT" != secondary_app_bar_text else "CHECK INPUT"
+        self.ids.secondary_app_bar.title = ("= " + str(round(float(secondary_app_bar_text), self.__decimal_places_to_show))) if "CHECK INPUT" != secondary_app_bar_text else "CHECK INPUT"
+
+    def __load_self_configuration_data(self):
+        if __name__ == "__main__":
+            self.__number_format_system = "auto"
+            self.__decimal_places_to_show = 2
+            self.__smart_formatting = True
+        else:
+            self.__number_format_system = str(self.config["format numbers' looks"]["number-format-system"])
+            self.__decimal_places_to_show = int(self.config["format numbers' looks"]["decimal-precision"])
+            self.__smart_formatting = bool(self.config["format numbers' looks"]["smart-formatting"])
+
+        if self.__number_format_system == "International Number System":
+            self.__number_format_system = "global"
+        elif self.__number_format_system == "Indian Number System":
+            self.__number_format_system = "indian"
+        elif self.__number_format_system == "Chinese Number System":
+            self.__number_format_system = "chinese"
+        elif self.__number_format_system == "According to Currency":
+            self.__number_format_system = "auto"
 
 class IndividualCurrencyItem(MDCard):
     def __init__(self, name:str, icon:str, text_to_show:str):
