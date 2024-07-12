@@ -148,8 +148,8 @@ if __name__ == "__main__":
 
     datas = []
     files = get_files_name_with_particular_extensions([os.path.join('.', "src")], ["kv"])
-    files.extend(get_files_name_with_particular_extensions([os.path.join('.', "assets")], ["png", "jpg", "svg", "jpeg", "bmp"]))
-    files.extend(get_files_name_with_particular_extensions([os.path.join('.')], ["json"], search_subdirs = False))
+    files.extend(get_files_name_with_particular_extensions([os.path.join('.', "assets")], ["png", "jpg", "svg", "jpeg", "bmp", "ttf"]))
+    files.extend(get_files_name_with_particular_extensions([os.path.join('.'), os.path.join('.', 'vendor', 'format_currency', 'src', 'format_currency', 'data')], ["json"], search_subdirs = False))
     files.extend(get_files_name_with_particular_extensions([os.path.join('.')], ["ini"], search_subdirs = False)) # app settings file
     for file_name in files:
         datas.append((file_name, os.path.dirname(file_name)))
