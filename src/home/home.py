@@ -36,7 +36,8 @@ class homeScreen(Screen):
             #todo https://github.com/hampusborgos/country-flags
             self.__add_currency(currency, "assets/icons/work-in-progress.png", '.')
     
-        self.add_widget(InputKeyboard(self.on_typed_string_change))
+        self.add_widget(InputKeyboard(self.on_typed_string_change, str(self.config["currencies to include"]["currently-typed-currency-value"])))
+        self.on_typed_string_change(str(self.config["currencies to include"]["currently-typed-currency-value"]))
     
     def __add_currency(self, name:str, icon:str, text_to_show:str):
         self.added_currencies_holder.append(IndividualCurrencyItem(name, icon, text_to_show))
@@ -44,6 +45,8 @@ class homeScreen(Screen):
 
     def on_typed_string_change(self, string:str):
         main_app_bar_text = string
+        self.config["currencies to include"]["currently-typed-currency-value"] = string
+        self.config.write()
         try:
             secondary_app_bar_text = InputKeyboard.evaluate_expression(string)
         except:
@@ -51,7 +54,21 @@ class homeScreen(Screen):
         
         for currency_holder in self.added_currencies_holder:
             try:
-                converted_value_str = format_currency(round(self.er.convert_currency(float(secondary_app_bar_text), "USD".lower(), currency_holder.name.lower()), self.__decimal_places_to_show), currency_code = currency_holder.name.lower(), number_format_system = self.__number_format_system, smart_number_formatting = self.__smart_formatting, place_currency_symbol_at_end = True, decimal_places = self.__decimal_places_to_show)
+                converted_value_str = format_currency(
+                    currency_code = currency_holder.name.lower(),
+                    number_format_system = self.__number_format_system,
+                    smart_number_formatting = self.__smart_formatting,
+                    place_currency_symbol_at_end = True,
+                    decimal_places = self.__decimal_places_to_show,
+                    number = round(
+                        self.er.convert_currency(
+                            float(secondary_app_bar_text), 
+                            self.config["currencies to include"]["currently-selected-currency"].lower(),
+                            currency_holder.name.lower()
+                            ),
+                        self.__decimal_places_to_show
+                        ),
+                    )
             except:
                 converted_value_str: str = "."
             currency_holder.update_currency_value_to_show(converted_value_str)
@@ -88,9 +105,10 @@ class InputKeyboard(MDCard):
     typed_string:str = ''
     buttons_to_add_text = ['7', '8', '9', 'x', '4', '5', '6', '/', '1', '2', '3', '-', '.', '0', "000", '+', '(', "DEL", "AC", ')']
 
-    def __init__(self, update_callback):
+    def __init__(self, update_callback, typed_string:str = ''):
         super(InputKeyboard, self).__init__()
         self.update_callback = update_callback
+        self.typed_string = typed_string
 
         for btn_text in self.buttons_to_add_text:
             btn = MDRaisedButton(text = btn_text, elevation = 0.5)
