@@ -26,7 +26,7 @@ class homeScreen(Screen):
     def __init__(self, config: ConfigParser, **kwargs):
         super(homeScreen, self).__init__(**kwargs)
         self.config = config
-        self.er = ExchangeRates("exchange_rates.json", True)
+        self.er = ExchangeRates(resource_find("exchange_rates.json"), True)
 
         self.__load_self_configuration_data()
 
