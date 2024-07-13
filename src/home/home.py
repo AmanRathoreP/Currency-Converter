@@ -1,11 +1,4 @@
-if __name__ == "__main__":
-    import sys
-    import os
-    sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
-
-    from src.settings.elements.sub_settings.currency_converter import ExchangeRates
-else:
-    from src.settings.elements.sub_settings.currency_converter import ExchangeRates
+from src.settings.elements.sub_settings.currency_converter import ExchangeRates
 
 import os
 from sympy import sympify
@@ -37,10 +30,7 @@ class homeScreen(Screen):
 
         self.__load_self_configuration_data()
 
-        if __name__ == "__main__":
-            currencies_to_add = ['INR', 'JPY', 'SAR', 'USD', 'THB']
-        else:
-            currencies_to_add = self.config["currencies to include"]["active-non-custom-currencies"].replace('\'', '').replace(' ', '')[1:-1].split(',')
+        currencies_to_add = self.config["currencies to include"]["active-non-custom-currencies"].replace('\'', '').replace(' ', '')[1:-1].split(',')
         currencies_to_add.sort()
         for currency in currencies_to_add:
             #todo https://github.com/hampusborgos/country-flags
@@ -69,14 +59,9 @@ class homeScreen(Screen):
         self.ids.secondary_app_bar.title = ("= " + str(round(float(secondary_app_bar_text), self.__decimal_places_to_show))) if "CHECK INPUT" != secondary_app_bar_text else "CHECK INPUT"
 
     def __load_self_configuration_data(self):
-        if __name__ == "__main__":
-            self.__number_format_system = "auto"
-            self.__decimal_places_to_show = 2
-            self.__smart_formatting = True
-        else:
-            self.__number_format_system = str(self.config["format numbers' looks"]["number-format-system"])
-            self.__decimal_places_to_show = int(self.config["format numbers' looks"]["decimal-precision"])
-            self.__smart_formatting = bool(self.config["format numbers' looks"]["smart-formatting"])
+        self.__number_format_system = str(self.config["format numbers' looks"]["number-format-system"])
+        self.__decimal_places_to_show = int(self.config["format numbers' looks"]["decimal-precision"])
+        self.__smart_formatting = bool(self.config["format numbers' looks"]["smart-formatting"])
 
         if self.__number_format_system == "International Number System":
             self.__number_format_system = "global"
@@ -131,10 +116,3 @@ class InputKeyboard(MDCard):
         expr = sympify(expression)
         result = expr.evalf()
         return str(result) if str(result) != "zoo" else "NaN"
-
-if __name__ == "__main__":
-    from kivymd.app import MDApp
-    class __test_temp_app(MDApp):  
-        def build(self):
-            return homeScreen(ConfigParser())
-    __test_temp_app().run()
