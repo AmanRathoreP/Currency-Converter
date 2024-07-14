@@ -13,16 +13,7 @@ class Currency(subSettingsTemplate):
         self.add_all_currencies_to_settings(**kwargs)
 
     def add_all_currencies_to_settings(self, **kwargs):
-        try:
-            if resource_find("exchange_rates.json") != None:
-                er = ExchangeRates(resource_find("exchange_rates.json"))
-            else:
-                open("exchange_rates.json", 'a').close()
-                er = ExchangeRates(resource_find("exchange_rates.json"))
-
-        except RuntimeError as e:
-            # todo show info to user
-            print(e)
+        er = ExchangeRates(resource_find("exchange_rates.json"), True)
         
         curr_list = er.get_lists()
         for type in curr_list:

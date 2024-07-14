@@ -32,6 +32,8 @@ class ExchangeRates:
         self.data_file = data_file
 
         if load_from_file:
+            if self.data_file == None:
+                raise FileNotFoundError("Exchange Rates json file not found. Create it by passing \"--create-er-file\" argument to \"generate_spec_for_exe.py\".")
             with open(self.data_file, 'r') as json_file_with_exchange_rates:
                 self.rates = json.load(json_file_with_exchange_rates)
             return
