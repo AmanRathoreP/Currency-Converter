@@ -145,6 +145,12 @@ if __name__ == "__main__":
 \tupx_exclude=[],
 \tname=\"{app_name}\",
 )"""
+        elif cli_arg == "--create-er-file" or cli_arg == "-cf":
+            print("Creating \"exchange_rates.json\" file...")
+            from src.settings.elements.sub_settings.currency_converter import ExchangeRates
+            er = ExchangeRates("exchange_rates.json")
+            del er
+            print("\"exchange_rates.json\" created successfully!")
 
     datas = []
     files = get_files_name_with_particular_extensions([os.path.join('.', "src")], ["kv"])
