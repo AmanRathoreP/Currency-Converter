@@ -10,6 +10,7 @@ if __name__ == "__main__":
 --hide-console/-hc To disable console while running the executable.
 --reset-config/-rc To make sure that config file has only and only defaults which are available in "available_options_for_each_setting".json file.
 --help/-h To display docs for cli args of the spec file generator.
+--create-er-file/-cf To create "exchange_rates.json" file by fetching latest data from api.
               """)
         exit()
 

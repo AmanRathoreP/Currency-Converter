@@ -57,13 +57,15 @@ Run the below commands one by one
   ```
 * Generate `.spec` using below command
   ```
-  python generate_spec_for_exe.py --onedir --reset-config
+  python generate_spec_for_exe.py --onedir --reset-config --create-er-file
   ```
   > Note that you can also use command line args like `--onedir`/`-od`, `--hide-console`/`-hc`.
     * `--help`/`-h` To display available cli args for `generate_spec_for_exe.py` along with their use(s).
     * `--onedir`/`-od` means that instead of an standalone exe user will be required to have bunch of file in order to run the app.
     * `--hide-console`/`-hc` means that no console will be displayed to the user after exe is created.
     * `--reset-config`/`-rc` make sure that config file has only and only defaults set by user in `available_options_for_each_setting.json` file.
+    * `--create-er-file`/`-cf` creates `exchange_rates.json` file by fetching latest data from api.
+
 * Build exe using below command
   ```
   python -m PyInstaller exe_build.spec
