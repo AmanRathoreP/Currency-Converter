@@ -2,3 +2,10 @@
 	# git submodule add --force --name format_currency https://github.com/AmanRathoreP/format-currency vendor/format_currency
 	path = vendor/format_currency
 	url = https://github.com/AmanRathoreP/format-currency
+[submodule "countries_flag"]
+	# git submodule add --force --name countries_flag --branch modified-for-currency-converter-app-png-only https://github.com/AmanRathoreP/countries-flag-for-Currency-Converter-app vendor/countries_flag
+	path = vendor/countries_flag
+	url = https://github.com/AmanRathoreP/countries-flag-for-Currency-Converter-app
+	branch = modified-for-currency-converter-app-png-only
+	# git config -f .gitmodules submodule.countries_flag.shallow true
+	shallow = true

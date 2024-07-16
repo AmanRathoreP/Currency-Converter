@@ -2,7 +2,7 @@ from src.settings.elements.sub_settings.currency_converter import ExchangeRates
 
 import os
 from sympy import sympify
-
+import json
 
 from vendor.format_currency.src.format_currency.format import format_currency
 
@@ -30,11 +30,17 @@ class homeScreen(Screen):
 
         self.__load_self_configuration_data()
 
+        with open(resource_find(os.path.join('.', "vendor", "countries_flag", "currency_code_to_flag.json")), 'r', encoding = "utf-8") as currency_code_to_flag_json_file:
+            self.currency_code_to_flag_json_data = json.load(currency_code_to_flag_json_file)
+            print(self.currency_code_to_flag_json_data["USD"])
+
         currencies_to_add = self.config["currencies to include"]["active-non-custom-currencies"].replace('\'', '').replace(' ', '')[1:-1].split(',')
         currencies_to_add.sort()
         for currency in currencies_to_add:
-            #todo https://github.com/hampusborgos/country-flags
-            self.__add_currency(currency, "assets/icons/work-in-progress.png", '.')
+            if currency.upper() in self.currency_code_to_flag_json_data:
+                self.__add_currency(currency, f"vendor/countries_flag/png/{self.currency_code_to_flag_json_data[currency.upper()].lower()}.png", '.')
+            else:
+                self.__add_currency(currency, "assets/icons/work-in-progress.png", '.')
     
         self.add_widget(InputKeyboard(self.on_typed_string_change, str(self.config["currencies to include"]["currently-typed-currency-value"])))
         self.on_typed_string_change(str(self.config["currencies to include"]["currently-typed-currency-value"]))
