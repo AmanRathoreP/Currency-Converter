@@ -92,4 +92,4 @@ class customCheckBox(individualSettingBaseClass):
     
     @property
     def previous_boolean_state_of_check_box(self):
-        self.config[self.section_name][self.setting_name]
+        return self.config[self.section_name][self.setting_name]

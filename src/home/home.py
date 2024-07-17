@@ -95,7 +95,7 @@ class homeScreen(Screen):
     def __load_self_configuration_data(self):
         self.__number_format_system = str(self.config["format numbers' looks"]["number-format-system"])
         self.__decimal_places_to_show = int(self.config["format numbers' looks"]["decimal-precision"])
-        self.__smart_formatting = bool(self.config["format numbers' looks"]["smart-formatting"])
+        self.__smart_formatting = self.config["format numbers' looks"]["smart-formatting"] == "True"
 
         if self.__number_format_system == "International Number System":
             self.__number_format_system = "global"
