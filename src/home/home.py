@@ -42,7 +42,18 @@ class homeScreen(Screen):
             else:
                 self.__add_currency(currency, "assets/icons/work-in-progress.png", '.')
     
-        self.add_widget(InputKeyboard(self.on_typed_string_change, str(self.config["currencies to include"]["currently-typed-currency-value"])))
+        self.add_widget(
+            InputKeyboard(
+                update_callback = self.on_typed_string_change,
+                decimal_places_to_show = self.__decimal_places_to_show,
+                typed_string = str(self.config["currencies to include"]["currently-typed-currency-value"]),
+                special_buttons = {
+                    'K': "1000",
+                    'M': "1000000",
+                    'B': "1000000000",
+                    },
+                )
+            )
         self.on_typed_string_change(str(self.config["currencies to include"]["currently-typed-currency-value"]))
     
     def __add_currency(self, name:str, icon:str, text_to_show:str):
@@ -109,12 +120,15 @@ class IndividualCurrencyItem(MDCard):
 
 class InputKeyboard(MDCard):
     typed_string:str = ''
-    buttons_to_add_text = ['7', '8', '9', 'x', '4', '5', '6', '/', '1', '2', '3', '-', '.', '0', "000", '+', '(', "DEL", "AC", ')']
+    buttons_to_add_text = ['7', '8', '9', 'x', '4', '5', '6', '/', '1', '2', '3', '-', '.', '0', '%', '+', '(', "DEL", "AC", ')', 'K', 'M', 'B', '=']
+    available_operators = ['x', '/', '-', '%', '+']
 
-    def __init__(self, update_callback, typed_string:str = ''):
+    def __init__(self, update_callback, decimal_places_to_show:int, special_buttons:dict, typed_string:str = ''):
         super(InputKeyboard, self).__init__()
         self.update_callback = update_callback
         self.typed_string = typed_string
+        self.__decimal_places_to_show = decimal_places_to_show
+        self.special_buttons = special_buttons
 
         for btn_text in self.buttons_to_add_text:
             btn = MDRaisedButton(text = btn_text, elevation = 0.5)
@@ -128,6 +142,15 @@ class InputKeyboard(MDCard):
             self.typed_string = ''
         elif button_text == "DEL":
             self.typed_string = '' if len(self.typed_string) == 0 else self.typed_string[:-1] 
+        elif button_text == '=':
+            self.typed_string = str(round(float(InputKeyboard.evaluate_expression(self.typed_string)), self.__decimal_places_to_show))
+        elif button_text in self.special_buttons.keys():
+            for btn_name in self.special_buttons:
+                if button_text == btn_name:
+                    if (self.typed_string[-1] if  len(self.typed_string) != 0 else 'x') not in self.available_operators:
+                        self.typed_string += f"x{self.special_buttons[btn_name]}"
+                    else:
+                        self.typed_string += self.special_buttons[btn_name]
         else:
             self.typed_string += button_text
 
