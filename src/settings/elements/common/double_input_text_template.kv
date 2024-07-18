@@ -1,0 +1,36 @@
+<doubleInputText>:
+    size_hint_y: None
+    height: dp(120)
+    padding: dp(10)
+    spacing: dp(10)
+    ripple_behavior: True
+    md_bg_color: (*app.theme_cls.primary_color[:3], 0.3)
+    ripple_color: (*app.theme_cls.accent_color[:3], 0.25)
+    
+    BoxLayout:
+        orientation: "vertical"
+        spacing: dp(30)
+        
+        MDLabel:
+            id: title
+            font_size: 26
+        
+        BoxLayout:
+            orientation: "horizontal"
+            spacing: dp(10)
+            
+            MDTextField:
+                id: left_text_input
+                text: "-1"
+                hint_text: "No helper text"
+                helper_text: "Button Name in Keyboard"
+                helper_text_mode: "persistent"
+                on_text: root.on_text_change(self.text, True)
+            MDTextField:
+                id: right_text_input
+                text: "-1"
+                hint_text: "No helper text"
+                helper_text: "Correspond Value in keyboard"
+                helper_text_mode: "persistent"
+                on_text: root.on_text_change(self.text, False)
+

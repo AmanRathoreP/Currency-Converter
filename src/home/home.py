@@ -3,6 +3,7 @@ from src.settings.elements.sub_settings.currency_converter import ExchangeRates
 import os
 from sympy import sympify
 import json
+import ast
 
 from vendor.format_currency.src.format_currency.format import format_currency
 
@@ -47,11 +48,7 @@ class homeScreen(Screen):
                 update_callback = self.on_typed_string_change,
                 decimal_places_to_show = self.__decimal_places_to_show,
                 typed_string = str(self.config["currencies to include"]["currently-typed-currency-value"]),
-                special_buttons = {
-                    'K': "1000",
-                    'M': "1000000",
-                    'B': "1000000000",
-                    },
+                special_buttons = self.__special_keyboard_buttons,
                 )
             )
         self.on_typed_string_change(str(self.config["currencies to include"]["currently-typed-currency-value"]))
@@ -96,6 +93,14 @@ class homeScreen(Screen):
         self.__number_format_system = str(self.config["format numbers' looks"]["number-format-system"])
         self.__decimal_places_to_show = int(self.config["format numbers' looks"]["decimal-precision"])
         self.__smart_formatting = self.config["format numbers' looks"]["smart-formatting"] == "True"
+        self.__special_keyboard_buttons:dict = {k: v for k, v in (
+                ast.literal_eval(s) for s in [
+                    self.config["format numbers' looks"]["special-keyboard-button-1"],
+                    self.config["format numbers' looks"]["special-keyboard-button-2"],
+                    self.config["format numbers' looks"]["special-keyboard-button-3"],
+                ]
+            )
+        }
 
         if self.__number_format_system == "International Number System":
             self.__number_format_system = "global"
@@ -129,6 +134,8 @@ class InputKeyboard(MDCard):
         self.typed_string = typed_string
         self.__decimal_places_to_show = decimal_places_to_show
         self.special_buttons = special_buttons
+
+        self.buttons_to_add_text[-4], self.buttons_to_add_text[-3], self.buttons_to_add_text[-2] = list(self.special_buttons.keys())[:3]
 
         for btn_text in self.buttons_to_add_text:
             btn = MDRaisedButton(text = btn_text, elevation = 0.5)

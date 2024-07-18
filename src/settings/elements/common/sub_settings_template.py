@@ -1,6 +1,7 @@
 from src.settings.elements.common.combobox_template import comboBox
 from src.settings.elements.common.info_label_template import infoLabel
 from src.settings.elements.common.checkbox_template import customCheckBox
+from src.settings.elements.common.double_input_text_template import doubleInputText
 
 import os
 import json
@@ -149,9 +150,10 @@ class subSettingsTemplate(MDScreen):
                     all_options_select_title = self.setting_properties["data"][setting_name_in_settings_properties_json_file]["all_options_select_title"] if "all_options_select_title" in self.setting_properties["data"][setting_name_in_settings_properties_json_file] else "Select All",
                     **kwargs
                 )
-
             elif self.setting_properties["data"][setting_name_in_settings_properties_json_file]["type"] == "checkbox-single-option-select":
                 self.add_checkbox(setting_name_in_settings_properties_json_file, check_box_type = "single-option-select", **kwargs)
+            elif self.setting_properties["data"][setting_name_in_settings_properties_json_file]["type"] == "double-input-text":
+                self.add_double_input_text(setting_name_in_settings_properties_json_file, **kwargs)
             else:
                 settings_not_added.append(setting_name_in_settings_properties_json_file)
         
@@ -180,5 +182,31 @@ class subSettingsTemplate(MDScreen):
         self.add_element_to_settings_screen(
             check_box,
             self.setting_properties["data"][setting_name_in_settings_properties_json_file]["tab"]["id"] if "tab" in self.setting_properties["data"][setting_name_in_settings_properties_json_file].keys() else None)
+        
+        return self
+    
+    def add_double_input_text(self, setting_name_in_settings_properties_json_file, **kwargs):
+        __sub_setting_properties = self.setting_properties["data"][setting_name_in_settings_properties_json_file]
+
+        double_input_text_properties = {
+            "max left chars": __sub_setting_properties.get("max left chars", None),
+            "max right chars": __sub_setting_properties.get("max right chars", None),
+            "left type":__sub_setting_properties.get("left type", "string"),
+            "right type":__sub_setting_properties.get("right type", "string"),
+        }
+        
+        double_input_text = doubleInputText(
+            self.config,
+            self.setting_section_name,
+            __sub_setting_properties["config file's setting name"],
+            __sub_setting_properties["title"],
+            __sub_setting_properties["left input title"],
+            __sub_setting_properties["right input title"],
+            **{**kwargs, **double_input_text_properties}
+            )
+        
+        self.add_element_to_settings_screen(
+            double_input_text,
+            __sub_setting_properties["tab"]["id"] if "tab" in __sub_setting_properties.keys() else None)
         
         return self
