@@ -25,25 +25,41 @@ class searchBackend():
         string_to_search = string_to_search.lower()
 
         for setting_type in self.setting_properties["data"]:
+            __setting_data:dict = self.setting_properties["data"][setting_type]
+            if "options" not in __setting_data:
+                __setting_data["options"] = []
+            if "alternate search strings" not in __setting_data:
+                __setting_data["alternate search strings"] = []
+
             setting_search_individual_raw_result = []
-            search_result_from_options = process.extract(string_to_search, [string.lower() for string in self.setting_properties["data"][setting_type]["options"]], scorer=fuzz.WRatio, limit=len(self.setting_properties["data"][setting_type]["options"]))
-            search_result_from_alternatives = process.extract(string_to_search, [string.lower() for string in self.setting_properties["data"][setting_type]["alternate search strings"]], scorer=fuzz.WRatio, limit=len(self.setting_properties["data"][setting_type]["alternate search strings"]))
+            search_result_from_options = process.extract(
+                string_to_search,
+                [string.lower() for string in __setting_data["options"]],
+                scorer=fuzz.WRatio,
+                limit=len(__setting_data["options"]))
+            search_result_from_alternatives = process.extract(
+                string_to_search,
+                [string.lower() for string in __setting_data["alternate search strings"]],
+                scorer=fuzz.WRatio,
+                limit=len(__setting_data["alternate search strings"]))
             for res in search_result_from_options:
                 if int(res[1]) > min_matching_percentage:
-                    setting_search_individual_raw_result.append((setting_type,
-                                                                 self.setting_properties["data"][setting_type]["title"] + " -> " + self.setting_properties["data"][setting_type]["options"][res[2]],
-                                                                 int(res[1])))
+                    setting_search_individual_raw_result.append((
+                        setting_type,
+                        __setting_data["title"] + " -> " + __setting_data["options"][res[2]],
+                        int(res[1])))
             
             for res in search_result_from_alternatives:
                 if int(res[1]) > min_matching_percentage:
-                    setting_search_individual_raw_result.append((f"!alternate_search_string_of_sub_setting!{setting_type}",
-                                        f"!alternate_search_string_of_sub_setting!{self.setting_properties["data"][setting_type]["title"]}" + '!' + self.setting_properties["data"][setting_type]["alternate search strings"][res[2]],
-                                        int(res[1])))
+                    setting_search_individual_raw_result.append((
+                        f"!alternate_search_string_of_sub_setting!{setting_type}",
+                        f"!alternate_search_string_of_sub_setting!{__setting_data["title"]}" + '!' + __setting_data["alternate search strings"][res[2]],
+                        int(res[1])))
             
             #* removing duplicate matches of alternate search and options search of same setting
             number_of_res_from_alternate_search_string_found: int = 0
             for res in setting_search_individual_raw_result:
-                if str(res[0]).find(f"!alternate_search_string_of_sub_setting!{self.setting_properties["data"][setting_type]["title"]}") != 1:
+                if str(res[0]).find(f"!alternate_search_string_of_sub_setting!{__setting_data["title"]}") != 1:
                     number_of_res_from_alternate_search_string_found += 1
             if number_of_res_from_alternate_search_string_found == len(setting_search_individual_raw_result) and len(setting_search_individual_raw_result) > 0:
                 #* all results are from alternate search so we will keep only one
