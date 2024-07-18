@@ -87,7 +87,6 @@
                 ],
                 "config file's setting name": "theme",
                 "title": "Theme",
-                "alternate search strings": [],
                 "type": "combo box",
                 "default": "Light"
             },
@@ -115,8 +114,6 @@
         ],
         "data": {
             "active-non-custom-currencies": {
-                "options": [],
-                "alternate search strings": [],
                 "config file's setting name": "active-non-custom-currencies",
                 "type": "NaN",
                 "default": [
@@ -131,8 +128,6 @@
                 }
             },
             "NaN": {
-                "options": [],
-                "alternate search strings": [],
                 "type": "NaN",
                 "tab": {
                     "id": "custom currencies",
@@ -242,19 +237,15 @@
         ],
         "data": {
             "test setting 1": {
-                "options": [],
                 "config file's setting name": "",
                 "title": "This is title",
                 "description": "check for setting 1 of Synchronisation",
-                "alternate search strings": [],
                 "type": "info label"
             },
             "test setting 2": {
-                "options": [],
                 "config file's setting name": "",
                 "title": "This is title",
                 "description": "check for setting 2 of Synchronisation",
-                "alternate search strings": [],
                 "type": "info label",
                 "subtitle": "This info is a subtitle"
             }
@@ -272,20 +263,16 @@
         ],
         "data": {
             "version": {
-                "options": [],
                 "config file's setting name": "",
                 "title": "version",
                 "description": "This is version v000",
-                "alternate search strings": [],
                 "type": "info label",
                 "subtitle": "This info is about version"
             },
             "author": {
-                "options": [],
                 "config file's setting name": "",
                 "title": "Author",
                 "description": "Created by Aman Rathore",
-                "alternate search strings": [],
                 "type": "info label",
                 "subtitle": "This info is about Author"
             }
