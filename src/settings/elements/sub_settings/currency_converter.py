@@ -141,7 +141,7 @@ class ExchangeRates:
         }
 
 if __name__ == "__main__":
-    exchange = ExchangeRates()
+    exchange = ExchangeRates("exchange_rates.json")
 
     # conversions
     amount_in_inr = 1000  # Amount in INR
