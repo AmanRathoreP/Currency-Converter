@@ -1,11 +1,13 @@
 <comboBox>:
-    size_hint_y:None
-    height:dp(60)
+    size_hint_y: None
+    height: dp(30) + label_option_name.texture_size[1] + (dp(0) if root.orientation == "horizontal" else  button_select.size[1])
     padding:dp(10)
     spacing:dp(10)
     ripple_behavior: True
     md_bg_color: (*app.theme_cls.primary_color[:3], 0.3)
     ripple_color: (*app.theme_cls.accent_color[:3], 0.25)
+    #! orientation: "vertical"
+    orientation: "horizontal" if self.width > 500 else "vertical"
 
     MDLabel:
         id: label_option_name
@@ -14,7 +16,7 @@
     MDRectangleFlatIconButton:
         id: button_select
         on_release: root.open_drop_item_menu(self)
-        pos_hint: {"center_x": .5, "center_y": .5}
+        pos_hint: {"center_y": .5} if label_option_name.texture_size[1] <= dp(31) else {"center_x": .5}
         text: "Dark"
         font_size: 19
         icon: "arrow-down-drop-circle"
