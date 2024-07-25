@@ -33,7 +33,6 @@ class homeScreen(Screen):
 
         with open(resource_find(os.path.join('.', "vendor", "countries_flag", "currency_code_to_flag.json")), 'r', encoding = "utf-8") as currency_code_to_flag_json_file:
             self.currency_code_to_flag_json_data = json.load(currency_code_to_flag_json_file)
-            print(self.currency_code_to_flag_json_data["USD"])
 
         currencies_to_add = self.config["currencies to include"]["active-non-custom-currencies"].replace('\'', '').replace(' ', '')[1:-1].split(',')
         currencies_to_add.sort()
@@ -51,10 +50,12 @@ class homeScreen(Screen):
                 special_buttons = self.__special_keyboard_buttons,
                 )
             )
+        
         self.on_typed_string_change(str(self.config["currencies to include"]["currently-typed-currency-value"]))
+        self.update_convert_from_currency(self.config["currencies to include"]["currently-selected-currency"])
     
     def __add_currency(self, name:str, icon:str, text_to_show:str):
-        self.added_currencies_holder.append(IndividualCurrencyItem(name, icon, text_to_show))
+        self.added_currencies_holder.append(IndividualCurrencyItem(name, icon, text_to_show, self.update_convert_from_currency))
         self.ids.currencies_panel.add_widget(self.added_currencies_holder[-1])
 
     def on_typed_string_change(self, string:str):
@@ -111,13 +112,25 @@ class homeScreen(Screen):
         elif self.__number_format_system == "According to Currency":
             self.__number_format_system = "auto"
 
+    def flag_icon_pressed(self): #todo add some macro that user chooses in settings
+        pass
+
+    def update_convert_from_currency(self, currency_code_to_change_to:str): #todo fix aspect ration of the icon/flag
+        self.ids.secondary_app_bar.left_action_items = [[f"vendor/countries_flag/png/{self.currency_code_to_flag_json_data[currency_code_to_change_to.upper()].lower()}.png", lambda x: print("New icon")]]
+        self.config["currencies to include"]["currently-selected-currency"] = currency_code_to_change_to.upper()
+        self.config.write()
+        self.on_typed_string_change(self.ids.main_app_bar.title)
+        print(f"changing to {currency_code_to_change_to}")
+
 class IndividualCurrencyItem(MDCard):
-    def __init__(self, name:str, icon:str, text_to_show:str):
+    def __init__(self, name:str, icon:str, text_to_show:str, release_callback):
         super(IndividualCurrencyItem, self).__init__()
         
         self.icon = icon
         self.text = text_to_show
         self.name = name
+
+        self.on_release = lambda: release_callback(self.name)
     
     def update_currency_value_to_show(self, text_to_show:str):
         self.ids.currency_text.text = text_to_show

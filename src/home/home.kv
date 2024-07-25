@@ -10,7 +10,7 @@
         title: "Final Vaule to conver will be displayed here"
         pos_hint: {"top": (self.parent.height - main_app_bar.height)/self.parent.height}
         elevation: 0
-        left_action_items: [["assets/icons/work-in-progress.png", lambda x: print((self.parent.height - main_app_bar.height)/self.parent.height)]]
+        left_action_items: [["assets/icons/work-in-progress.png", lambda x: root.flag_icon_pressed()]]
 
     MDBoxLayout:
         orientation: 'vertical'
