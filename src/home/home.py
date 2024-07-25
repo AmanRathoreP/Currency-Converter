@@ -139,7 +139,7 @@ class IndividualCurrencyItem(MDCard):
 class InputKeyboard(MDCard):
     typed_string:str = ''
     buttons_to_add_text = ['7', '8', '9', 'x', '4', '5', '6', '/', '1', '2', '3', '-', '.', '0', '%', '+', '(', "DEL", "AC", ')', 'K', 'M', 'B', '=']
-    available_operators = ['x', '/', '-', '%', '+']
+    available_operators = ['x', '/', '-', '%', '+', '(']
 
     def __init__(self, update_callback, decimal_places_to_show:int, special_buttons:dict, typed_string:str = ''):
         super(InputKeyboard, self).__init__()
