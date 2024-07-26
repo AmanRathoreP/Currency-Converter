@@ -58,7 +58,7 @@ class homeScreen(Screen):
         self.added_currencies_holder.append(IndividualCurrencyItem(name, icon, text_to_show, self.update_convert_from_currency))
         self.ids.currencies_panel.add_widget(self.added_currencies_holder[-1])
 
-    def on_typed_string_change(self, string:str):
+    def on_typed_string_change(self, string:str, things_to_write = "actual stuff"):
         main_app_bar_text = string
         self.config["currencies to include"]["currently-typed-currency-value"] = string
         self.config.write()
@@ -72,7 +72,7 @@ class homeScreen(Screen):
                 converted_value_str = format_currency(
                     currency_code = currency_holder.name.lower(),
                     number_format_system = self.__number_format_system,
-                    smart_number_formatting = self.__smart_formatting,
+                    smart_number_formatting = (self.__smart_formatting or "only Smart Formatting" in things_to_write) and "only Normal Formatting" not in things_to_write,
                     place_currency_symbol_at_end = True,
                     decimal_places = self.__decimal_places_to_show,
                     number = round(
@@ -84,6 +84,27 @@ class homeScreen(Screen):
                         self.__decimal_places_to_show
                         ),
                     )
+                if "both Smart & Normal" in things_to_write:
+                    converted_value_str = ''
+                    for smart_format_true_or_false in [True, False]:
+                        converted_value_str += format_currency(
+                            currency_code = currency_holder.name.lower(),
+                            number_format_system = self.__number_format_system,
+                            smart_number_formatting = smart_format_true_or_false,
+                            place_currency_symbol_at_end = True,
+                            decimal_places = self.__decimal_places_to_show,
+                            number = round(
+                                self.er.convert_currency(
+                                    float(secondary_app_bar_text), 
+                                    self.config["currencies to include"]["currently-selected-currency"].lower(),
+                                    currency_holder.name.lower()
+                                    ),
+                                self.__decimal_places_to_show
+                                ),
+                            ) + " i.e. \n"
+                    
+                    converted_value_str = converted_value_str[:-len(" i.e. \n")]
+                    
             except:
                 converted_value_str: str = "."
             currency_holder.update_currency_value_to_show(converted_value_str)
@@ -112,11 +133,18 @@ class homeScreen(Screen):
         elif self.__number_format_system == "According to Currency":
             self.__number_format_system = "auto"
 
-    def flag_icon_pressed(self): #todo add some macro that user chooses in settings
-        pass
+    def flag_icon_pressed(self):
+        if self.ids.secondary_app_bar.title == '.' or \
+            "inf" in self.ids.secondary_app_bar.title or\
+            self.ids.secondary_app_bar.title == "CHECK INPUT" or \
+            self.config["format numbers' looks"]["flag-button-toggle-action"] == "No toggle action":
+            return
+        
+        self.on_typed_string_change(string = self.ids.main_app_bar.title,
+                                    things_to_write = self.config["format numbers' looks"]["flag-button-toggle-action"] + ' ' + "actual stuff")
 
     def update_convert_from_currency(self, currency_code_to_change_to:str): #todo fix aspect ration of the icon/flag
-        self.ids.secondary_app_bar.left_action_items = [[f"vendor/countries_flag/png/{self.currency_code_to_flag_json_data[currency_code_to_change_to.upper()].lower()}.png", lambda x: print("New icon")]]
+        self.ids.secondary_app_bar.left_action_items = [[f"vendor/countries_flag/png/{self.currency_code_to_flag_json_data[currency_code_to_change_to.upper()].lower()}.png", lambda x: self.flag_icon_pressed()]]
         self.config["currencies to include"]["currently-selected-currency"] = currency_code_to_change_to.upper()
         self.config.write()
         self.on_typed_string_change(self.ids.main_app_bar.title)

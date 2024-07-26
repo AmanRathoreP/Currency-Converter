@@ -221,6 +221,27 @@
                 "type": "combo box",
                 "default": "2"
             },
+            "flag-button-toggle-action": {
+                "options": [
+                    "both Smart & Normal",
+                    "only Normal Formatting",
+                    "only Smart Formatting",
+                    "No toggle action"
+                ],
+                "config file's setting name": "flag-button-toggle-action",
+                "title": "Flag Icon Toggle Formatting",
+                "alternate search strings": [
+                    "action",
+                    "icon",
+                    "toggle",
+                    "flag",
+                    "smart formatting",
+                    "smart",
+                    "formatting"
+                ],
+                "type": "combo box",
+                "default": "+ Smart Formatting"
+            },
             "special-keyboard-button-1": {
                 "options": [],
                 "config file's setting name": "special-keyboard-button-1",
