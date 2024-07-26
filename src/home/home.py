@@ -183,15 +183,29 @@ class InputKeyboard(MDCard):
             btn.on_release = lambda bt=btn_text: self.button_press(bt)
             self.ids.buttons_grid.add_widget(btn)
         
-    
     def button_press(self, button_text:str):
-        #todo constrain inputs as a whole to resolve ambiguities
         if button_text == "AC":
             self.typed_string = ''
         elif button_text == "DEL":
             self.typed_string = '' if len(self.typed_string) == 0 else self.typed_string[:-1] 
         elif button_text == '=':
             self.typed_string = str(round(float(InputKeyboard.evaluate_expression(self.typed_string)), self.__decimal_places_to_show))
+        elif button_text == '.':
+            if self.typed_string[-1] == '.':
+                return
+            else:
+                try:
+                    InputKeyboard.evaluate_expression((self.typed_string + '.' + '0') if (self.typed_string.count('(') == self.typed_string.count(')')) else (self.typed_string.split('(')[-1] + '.' + '0'))
+                    self.typed_string += '.'
+                except:
+                    return
+        elif button_text == '(':
+            if self.typed_string[-1] not in self.available_operators:
+                self.typed_string += "x("
+            else:
+                self.typed_string += '('
+        elif button_text in "0123456789" and (self.typed_string[-1] == ')' if len(self.typed_string) != 0 else False):
+            self.typed_string += 'x' + button_text
         elif button_text in self.special_buttons.keys():
             for btn_name in self.special_buttons:
                 if button_text == btn_name:
