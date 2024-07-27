@@ -21,6 +21,7 @@
             size_hint: 1, None
             height: root.height - main_app_bar.height - secondary_app_bar.height - dp(20)
             pos_hint: {"top": (root.height - (main_app_bar.height + secondary_app_bar.height))/root.height}
+            on_scroll_start: root.deal_with_hiding_of_keyboard(self.scroll_y)
 
             MDBoxLayout:
                 id: currencies_panel

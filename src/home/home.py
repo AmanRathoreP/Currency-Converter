@@ -23,6 +23,7 @@ for kv_file in kivy_design_files:
 class homeScreen(Screen):
     er:ExchangeRates = None
     added_currencies_holder = []
+    scroll_view_previous_y_scroll_value:float = 1
 
     def __init__(self, config: ConfigParser, **kwargs):
         super(homeScreen, self).__init__(**kwargs)
@@ -42,14 +43,13 @@ class homeScreen(Screen):
             else:
                 self.__add_currency(currency, "assets/icons/work-in-progress.png", '.')
     
-        self.add_widget(
-            InputKeyboard(
+        self.input_keyboard = InputKeyboard(
                 update_callback = self.on_typed_string_change,
                 decimal_places_to_show = self.__decimal_places_to_show,
                 typed_string = str(self.config["currencies to include"]["currently-typed-currency-value"]),
                 special_buttons = self.__special_keyboard_buttons,
                 )
-            )
+        self.add_widget(self.input_keyboard)
         
         self.on_typed_string_change(str(self.config["currencies to include"]["currently-typed-currency-value"]))
         self.update_convert_from_currency(self.config["currencies to include"]["currently-selected-currency"])
@@ -149,6 +149,14 @@ class homeScreen(Screen):
         self.config.write()
         self.on_typed_string_change(self.ids.main_app_bar.title)
         print(f"changing to {currency_code_to_change_to}")
+
+    def deal_with_hiding_of_keyboard(self, y_scroll):
+        if (y_scroll >= self.scroll_view_previous_y_scroll_value) and y_scroll != 0:
+            self.input_keyboard.opacity = 1
+        else:
+            self.input_keyboard.opacity = 0
+
+        self.scroll_view_previous_y_scroll_value = y_scroll
 
 class IndividualCurrencyItem(MDCard):
     def __init__(self, name:str, icon:str, text_to_show:str, release_callback):
