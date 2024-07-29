@@ -240,7 +240,7 @@
                     "formatting"
                 ],
                 "type": "combo box",
-                "default": "+ Smart Formatting"
+                "default": "both Smart & Normal"
             },
             "flag-action-button-reset-time": {
                 "options": [
