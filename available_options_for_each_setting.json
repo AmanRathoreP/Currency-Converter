@@ -242,6 +242,31 @@
                 "type": "combo box",
                 "default": "+ Smart Formatting"
             },
+            "flag-action-button-reset-time": {
+                "options": [
+                    "0.5",
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9"
+                ],
+                "config file's setting name": "flag-action-button-reset-time",
+                "title": "Special Action Reset Time",
+                "alternate search strings": [
+                    "delay",
+                    "flag action",
+                    "special button time",
+                    "reset",
+                    "time"
+                ],
+                "type": "combo box",
+                "default": "3"
+            },
             "special-keyboard-button-1": {
                 "options": [],
                 "config file's setting name": "special-keyboard-button-1",

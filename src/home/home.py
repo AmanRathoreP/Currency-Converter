@@ -12,6 +12,7 @@ from kivy.uix.screenmanager import Screen
 from kivy.config import ConfigParser
 from kivy.metrics import dp
 from kivy.resources import resource_find
+from kivy.clock import Clock
 from kivymd.app import MDApp
 from kivymd.uix.card import MDCard
 from kivymd.uix.button import MDRaisedButton
@@ -139,6 +140,8 @@ class homeScreen(Screen):
             self.ids.secondary_app_bar.title == "CHECK INPUT" or \
             self.config["format numbers' looks"]["flag-button-toggle-action"] == "No toggle action":
             return
+        
+        Clock.schedule_once(lambda dt: self.on_typed_string_change(self.ids.main_app_bar.title), float(self.config["format numbers' looks"]["flag-action-button-reset-time"]))
         
         self.on_typed_string_change(string = self.ids.main_app_bar.title,
                                     things_to_write = self.config["format numbers' looks"]["flag-button-toggle-action"] + ' ' + "actual stuff")
