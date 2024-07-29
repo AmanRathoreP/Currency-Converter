@@ -244,6 +244,7 @@
             },
             "flag-action-button-reset-time": {
                 "options": [
+                    "Auto",
                     "0.5",
                     "1",
                     "2",

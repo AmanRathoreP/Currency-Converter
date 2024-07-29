@@ -141,7 +141,8 @@ class homeScreen(Screen):
             self.config["format numbers' looks"]["flag-button-toggle-action"] == "No toggle action":
             return
         
-        Clock.schedule_once(lambda dt: self.on_typed_string_change(self.ids.main_app_bar.title), float(self.config["format numbers' looks"]["flag-action-button-reset-time"]))
+        if "Auto" != self.config["format numbers' looks"]["flag-action-button-reset-time"]:
+            Clock.schedule_once(lambda dt: self.on_typed_string_change(self.ids.main_app_bar.title), float(self.config["format numbers' looks"]["flag-action-button-reset-time"]))
         
         self.on_typed_string_change(string = self.ids.main_app_bar.title,
                                     things_to_write = self.config["format numbers' looks"]["flag-button-toggle-action"] + ' ' + "actual stuff")
