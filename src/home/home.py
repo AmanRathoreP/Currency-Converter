@@ -30,6 +30,7 @@ class homeScreen(Screen):
         super(homeScreen, self).__init__(**kwargs)
         self.config = config
         self.er = ExchangeRates(resource_find("exchange_rates.json"), True)
+        self.special_formatting_on:bool = False
 
         self.__load_self_configuration_data()
 
@@ -135,6 +136,11 @@ class homeScreen(Screen):
             self.__number_format_system = "auto"
 
     def flag_icon_pressed(self):
+        if self.special_formatting_on:
+            self.on_typed_string_change(self.ids.main_app_bar.title,things_to_write = "actual stuff")
+            self.special_formatting_on = False
+            return
+
         if self.ids.secondary_app_bar.title == '.' or \
             "inf" in self.ids.secondary_app_bar.title or\
             self.ids.secondary_app_bar.title == "CHECK INPUT" or \
@@ -142,10 +148,15 @@ class homeScreen(Screen):
             return
         
         if "Auto" != self.config["format numbers' looks"]["flag-action-button-reset-time"]:
-            Clock.schedule_once(lambda dt: self.on_typed_string_change(self.ids.main_app_bar.title), float(self.config["format numbers' looks"]["flag-action-button-reset-time"]))
-        
+            Clock.schedule_once(
+                lambda dt: (self.on_typed_string_change(self.ids.main_app_bar.title), setattr(self, 'special_formatting_on', False)),
+                float(self.config["format numbers' looks"]["flag-action-button-reset-time"])
+            )
+
         self.on_typed_string_change(string = self.ids.main_app_bar.title,
                                     things_to_write = self.config["format numbers' looks"]["flag-button-toggle-action"] + ' ' + "actual stuff")
+        
+        self.special_formatting_on = True
 
     def update_convert_from_currency(self, currency_code_to_change_to:str): #todo fix aspect ration of the icon/flag
         self.ids.secondary_app_bar.left_action_items = [[f"vendor/countries_flag/png/{self.currency_code_to_flag_json_data[currency_code_to_change_to.upper()].lower()}.png", lambda x: self.flag_icon_pressed()]]
