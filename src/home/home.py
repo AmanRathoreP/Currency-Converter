@@ -31,6 +31,7 @@ class homeScreen(Screen):
         self.config = config
         self.er = ExchangeRates(resource_find("exchange_rates.json"), True)
         self.special_formatting_on:bool = False
+        self.__on_typed_string_change_scheduled_event = None
 
         self.__load_self_configuration_data()
 
@@ -148,7 +149,10 @@ class homeScreen(Screen):
             return
         
         if "Auto" != self.config["format numbers' looks"]["flag-action-button-reset-time"]:
-            Clock.schedule_once(
+            if self.__on_typed_string_change_scheduled_event:
+                self.__on_typed_string_change_scheduled_event.cancel()
+
+            self.__on_typed_string_change_scheduled_event = Clock.schedule_once(
                 lambda dt: (self.on_typed_string_change(self.ids.main_app_bar.title), setattr(self, 'special_formatting_on', False)),
                 float(self.config["format numbers' looks"]["flag-action-button-reset-time"])
             )
