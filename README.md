@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>Currency Converter</h1>
+  <h1>Currency Converter - v0-pre-release</h1>
 </div>
 
 <p align="center">
@@ -16,6 +16,8 @@
 * No Ads
 * Modern UI
 * Customisable look-and-feel
+* Customisable special buttons referring to particular number
+* Customisable behaviour of toggle formatting button
 * ...
 
 # Platforms
@@ -27,7 +29,13 @@
 # Quick start
 
 ## Pre-Compiled download
-...
+
+Go to releases page for windows exe download.
+
+## Self-Run
+
+To run the application without building, you need the `exchange_rates.json` file, which can be created by generating the spec for the executable file, with cli flag of `--create-er-file`/`-cf`.
+> Tip: Do all the steps of the [Self-Build](#self-build) except building exe and then run `python app.py` to run the code.
 
 ## Self-Build
 
@@ -37,11 +45,15 @@ Run the below commands one by one
 
 * Cloning the repository
   ```
-  git clone https://github.com/AmanRathoreP/Currency-Converter.git
+  git clone -b master https://github.com/AmanRathoreP/Currency-Converter.git
   ```
 * Navigating to the project's directory
   ```
   cd "Currency-Converter"
+  ```
+* Initializing submodules
+  ```
+  git submodule update --init --recursive
   ```
 * Creating python's virtual environment
   ```
@@ -84,7 +96,7 @@ We welcome any type of contribution, _not only code_. You can help with:
 
 # Demo
 
-...
+Go to latest releases for demo pics/vids.
 
 # Author
 
@@ -94,12 +106,27 @@ We welcome any type of contribution, _not only code_. You can help with:
    - Email -> *aman.proj.rel@gmail.com*
 
 # Facts
-* ...
+
+## Dawn
+
+* This project started as a necessary tool as I was finding a software to do the same.
+
+## Technicalities
+
+### Below provided are some of the submodules used for the project
+
+* format-currency python module [forked](https://github.com/AmanRathoreP/format-currency) from [Arif Widi Nugroho](https://github.com/arifwn)'s [format-currency](https://github.com/arifwn/format-currency).
+* Flag images from [countries-flag-for-Currency-Converter-app forked](https://github.com/AmanRathoreP/countries-flag-for-Currency-Converter-app) from [country-flags](https://github.com/hampusborgos/country-flags) by [Hampus Joakim Borgos](https://github.com/hampusborgos)
 
 # Thanks to
+
 * For icons
   * <a href="https://www.flaticon.com/free-icons/under-construction" title="under construction icons">Under construction icons created by Freepik - Flaticon</a>
   * <a href="https://www.flaticon.com/free-icons/settings" title="settings icons">Settings icons created by dmitri13 - Flaticon</a>
+* For code
+  * [Arif Widi Nugroho](https://github.com/hampusborgos) for [format-currency](https://github.com/hampusborgos/country-flags)
+* For assets
+  * [Hampus Joakim Borgos](https://github.com/arifwn) for [country-flags](https://github.com/arifwn/format-currency)
 
 
 # License
