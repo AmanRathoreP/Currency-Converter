@@ -4,6 +4,7 @@ import os
 from sympy import sympify
 import json
 import ast
+from time import time as unix_sec
 
 from vendor.format_currency.src.format_currency.format import format_currency
 
@@ -29,7 +30,6 @@ class homeScreen(Screen):
     def __init__(self, config: ConfigParser, **kwargs):
         super(homeScreen, self).__init__(**kwargs)
         self.config = config
-        self.er = ExchangeRates(resource_find("exchange_rates.json"), True)
         self.special_formatting_on:bool = False
         self.__on_typed_string_change_scheduled_event = None
 
@@ -136,6 +136,34 @@ class homeScreen(Screen):
         elif self.__number_format_system == "According to Currency":
             self.__number_format_system = "auto"
 
+        __sync_update_period = -1 #* in seconds
+        if "Hour" == self.config["sync"]["sync-period"]:
+            __sync_update_period = 3600
+        elif "Day" == self.config["sync"]["sync-period"]:
+            __sync_update_period = 86400
+        elif "Week" == self.config["sync"]["sync-period"]:
+            __sync_update_period = 607800
+        elif "Month" == self.config["sync"]["sync-period"]:
+            __sync_update_period = 2419200 #* 7*4 days
+        elif "Season" == self.config["sync"]["sync-period"]:
+            __sync_update_period = 7257600 #* 7*4*3 days i.e. 3 months
+
+        if int(self.config["sync"]["last-sync-time-unix-seconds"]) + __sync_update_period < unix_sec():
+            __load_er_from_file:bool = False
+        else:
+            __load_er_from_file:bool = True
+
+        if self.config["sync"]["last-sync-time-unix-seconds"] == -1:
+            __load_er_from_file:bool = False
+        
+        try:
+            self.er = ExchangeRates(resource_find("exchange_rates.json"), __load_er_from_file)
+        except RuntimeError:
+            self.er = ExchangeRates(resource_find("exchange_rates.json"))
+            self._show_info_about_unable_to_fetch_from_api()
+
+        self.config["sync"]["last-sync-time-unix-seconds"] = str(int(unix_sec()))
+
     def flag_icon_pressed(self):
         if self.special_formatting_on:
             self.on_typed_string_change(self.ids.main_app_bar.title,things_to_write = "actual stuff")
@@ -176,6 +204,9 @@ class homeScreen(Screen):
             self.input_keyboard.opacity = 0
 
         self.scroll_view_previous_y_scroll_value = y_scroll
+
+    def _show_info_about_unable_to_fetch_from_api(self): #todo show info to user
+        pass
 
 class IndividualCurrencyItem(MDCard):
     def __init__(self, name:str, icon:str, text_to_show:str, release_callback):

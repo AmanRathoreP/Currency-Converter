@@ -397,18 +397,34 @@
             "interval"
         ],
         "data": {
-            "test setting 1": {
-                "config file's setting name": "",
-                "title": "This is title",
-                "description": "check for setting 1 of Synchronisation",
-                "type": "info label"
+            "sync-period": {
+                "options": [
+                    "Hour",
+                    "Day",
+                    "Week",
+                    "Month",
+                    "Season",
+                    "Boot"
+                ],
+                "config file's setting name": "sync-period",
+                "title": "Sync Every",
+                "alternate search strings": [
+                    "sync every",
+                    "Synchronization period",
+                    "Synchronisation period",
+                    "Synchronization",
+                    "Synchronisation",
+                    "sync time",
+                    "Synchronization time",
+                    "Synchronisation time"
+                ],
+                "type": "combo box",
+                "default": "Day"
             },
-            "test setting 2": {
-                "config file's setting name": "",
-                "title": "This is title",
-                "description": "check for setting 2 of Synchronisation",
-                "type": "info label",
-                "subtitle": "This info is a subtitle"
+            "last-sync-time-unix-seconds": {
+                "config file's setting name": "last-sync-time-unix-seconds",
+                "type": "NaN",
+                "default": -1
             }
         }
     },
