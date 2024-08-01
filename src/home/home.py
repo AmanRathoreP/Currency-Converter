@@ -159,7 +159,7 @@ class homeScreen(Screen):
         try:
             self.er = ExchangeRates(resource_find("exchange_rates.json"), __load_er_from_file)
         except RuntimeError:
-            self.er = ExchangeRates(resource_find("exchange_rates.json"))
+            self.er = ExchangeRates(resource_find("exchange_rates.json"), True)
             self._show_info_about_unable_to_fetch_from_api()
 
         self.config["sync"]["last-sync-time-unix-seconds"] = str(int(unix_sec()))
