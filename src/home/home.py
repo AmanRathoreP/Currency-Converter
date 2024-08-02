@@ -5,6 +5,7 @@ from sympy import sympify
 import json
 import ast
 from time import time as unix_sec
+import webbrowser
 
 from vendor.format_currency.src.format_currency.format import format_currency
 
@@ -210,7 +211,7 @@ class homeScreen(Screen):
 
         self.scroll_view_previous_y_scroll_value = y_scroll
 
-    def _show_info_about_unable_to_fetch_from_api(self): #todo show info to user
+    def _show_info_about_unable_to_fetch_from_api(self):
         self.dialog = MDDialog(
             title = "API Error",
             text = "Unable to fetch data from the API. Please try again later, or report by mailing at aman.proj.rel@gmail.com.",
@@ -247,8 +248,13 @@ class homeScreen(Screen):
         )
     
     def __send_report_about_api(self):
-        #todo use webbrowser to send report
-        pass
+        # Define the email details
+        subject = "API Error Report"
+        body = f"There was an error while fetching data from the API. URL which was used is \"{self.er.url}\". Last update local data on {self.config["sync"]["last-sync-time-unix-seconds"]}"
+        recipient = "aman.proj.rel@gmail.com"
+        
+        # Open the email client
+        webbrowser.open(f"mailto:{recipient}?subject={subject}&body={body}")
 
 class IndividualCurrencyItem(MDCard):
     def __init__(self, name:str, icon:str, text_to_show:str, release_callback):
