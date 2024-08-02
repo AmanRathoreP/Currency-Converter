@@ -164,6 +164,7 @@ class homeScreen(Screen):
     def __load_er_data(self, __load_er_from_file:bool):
         try:
             self.er = ExchangeRates(resource_find("exchange_rates.json"), __load_er_from_file)
+            Clock.schedule_once(lambda x: toast("Successfully fetched data from api", duration = 4), 0.5)
         except RuntimeError:
             self.er = ExchangeRates(resource_find("exchange_rates.json"), True)
             self._show_info_about_unable_to_fetch_from_api()
