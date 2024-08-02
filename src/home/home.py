@@ -16,7 +16,9 @@ from kivy.resources import resource_find
 from kivy.clock import Clock
 from kivymd.app import MDApp
 from kivymd.uix.card import MDCard
-from kivymd.uix.button import MDRaisedButton
+from kivymd.uix.button import MDRaisedButton, MDFlatButton
+from kivymd.uix.dialog import MDDialog
+from kivymd.toast import toast
 
 kivy_design_files = ["home", "individual_currency_item", "input_keyboard"]
 for kv_file in kivy_design_files:
@@ -156,6 +158,9 @@ class homeScreen(Screen):
         if self.config["sync"]["last-sync-time-unix-seconds"] == -1:
             __load_er_from_file:bool = False
         
+        self.__load_er_data(__load_er_from_file)
+    
+    def __load_er_data(self, __load_er_from_file:bool):
         try:
             self.er = ExchangeRates(resource_find("exchange_rates.json"), __load_er_from_file)
         except RuntimeError:
@@ -206,6 +211,43 @@ class homeScreen(Screen):
         self.scroll_view_previous_y_scroll_value = y_scroll
 
     def _show_info_about_unable_to_fetch_from_api(self): #todo show info to user
+        self.dialog = MDDialog(
+            title = "API Error",
+            text = "Unable to fetch data from the API. Please try again later, or report by mailing at aman.proj.rel@gmail.com.",
+            buttons = [
+                MDRaisedButton(
+                    text="RETRY",
+                    on_release = lambda x: (
+                        self.dialog.dismiss(),
+                        toast("Retrying..."),
+                        Clock.schedule_once(lambda dt: self.__load_er_data(False), .05),
+                    )
+                ),
+                MDFlatButton(
+                    text="CANCEL",
+                    on_release = lambda x: (
+                        self.dialog.dismiss(),
+                        toast("Loading From File..."),
+                    )
+                ),
+                MDFlatButton(
+                    text="SEND REPORT",
+                    on_release = lambda x: (
+                        self.dialog.dismiss(),
+                        toast("Opening email client..."),
+                        Clock.schedule_once(lambda dt: self.__send_report_about_api(), .05)
+                    )
+                ),
+            ],
+        )
+
+        Clock.schedule_once(
+            lambda dt: self.dialog.open(),
+            .3
+        )
+    
+    def __send_report_about_api(self):
+        #todo use webbrowser to send report
         pass
 
 class IndividualCurrencyItem(MDCard):
