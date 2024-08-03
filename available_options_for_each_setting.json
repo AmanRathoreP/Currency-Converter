@@ -127,22 +127,13 @@
                     "name": "Available Currencies"
                 }
             },
-            "NaN": {
-                "type": "NaN",
-                "tab": {
-                    "id": "custom currencies",
-                    "name": "Custom Currencies",
-                    "icon": "cash"
-                }
-            },
             "currently-selected-currency": {
                 "config file's setting name": "currently-selected-currency",
                 "type": "NaN",
                 "default": "EUR",
                 "tab": {
-                    "id": "custom currencies",
-                    "name": "Custom Currencies",
-                    "icon": "cash"
+                    "id": "available currencies by default",
+                    "name": "Available Currencies"
                 }
             },
             "currently-typed-currency-value": {
@@ -150,9 +141,8 @@
                 "type": "NaN",
                 "default": "1",
                 "tab": {
-                    "id": "custom currencies",
-                    "name": "Custom Currencies",
-                    "icon": "cash"
+                    "id": "available currencies by default",
+                    "name": "Available Currencies"
                 }
             }
         }

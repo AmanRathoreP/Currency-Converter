@@ -12,7 +12,6 @@
 * Currency Conversion
 * Cryptocurrency Support
 * Auto Update Currency Value
-* Custom Currencies
 * No Ads
 * Modern UI
 * Customisable look-and-feel
