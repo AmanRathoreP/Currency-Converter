@@ -144,6 +144,30 @@
                     "id": "available currencies by default",
                     "name": "Available Currencies"
                 }
+            },
+            "sort-type": {
+                "options": [
+                    "Ascending",
+                    "Descending",
+                    "Currency Value (Ascending)",
+                    "Currency Value (Descending)",
+                    "Random",
+                    "Custom"
+                ],
+                "config file's setting name": "sort-type",
+                "title": "Sort by",
+                "alternate search strings": [
+                    "sort",
+                    "value",
+                    "currency sort"
+                ],
+                "type": "combo box",
+                "default": "Currency Value (Ascending)",
+                "tab": {
+                    "id": "currencies order",
+                    "name": "Currencies Order",
+                    "icon": "sort"
+                }
             }
         }
     },
