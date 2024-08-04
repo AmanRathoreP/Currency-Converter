@@ -265,6 +265,12 @@ class homeScreen(Screen):
             currencies_list.sort(reverse = True)
         elif sort_type == "Random":
             rd_shuffle(currencies_list)
+        elif "Currency Value" in sort_type:
+            __value_dict:dict = {self.er.convert_currency(1, "usd", currencies_list[i].lower()): currencies_list[i] for i in range(len(currencies_list))}
+            if sort_type == "Currency Value (Ascending)":
+                currencies_list = [value for key, value in sorted(__value_dict.items(), reverse = True)]
+            elif sort_type == "Currency Value (Descending)":
+                currencies_list = [value for key, value in sorted(__value_dict.items())]
         
         return currencies_list
 
