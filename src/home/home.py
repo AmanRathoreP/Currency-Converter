@@ -6,6 +6,7 @@ import json
 import ast
 from time import time as unix_sec
 import webbrowser
+from random import shuffle as rd_shuffle
 
 from vendor.format_currency.src.format_currency.format import format_currency
 
@@ -41,8 +42,8 @@ class homeScreen(Screen):
         with open(resource_find(os.path.join('.', "vendor", "countries_flag", "currency_code_to_flag.json")), 'r', encoding = "utf-8") as currency_code_to_flag_json_file:
             self.currency_code_to_flag_json_data = json.load(currency_code_to_flag_json_file)
 
-        currencies_to_add = self.config["currencies to include"]["active-non-custom-currencies"].replace('\'', '').replace(' ', '')[1:-1].split(',')
-        currencies_to_add.sort()
+        currencies_to_add = ast.literal_eval(self.config["currencies to include"]["active-non-custom-currencies"])
+        currencies_to_add = self.sort_currencies(currencies_to_add, self.config["currencies to include"]["sort-type"])
         for currency in currencies_to_add:
             if currency.upper() in self.currency_code_to_flag_json_data:
                 self.__add_currency(currency, f"vendor/countries_flag/png/{self.currency_code_to_flag_json_data[currency.upper()].lower()}.png", '.')
@@ -256,6 +257,16 @@ class homeScreen(Screen):
         
         # Open the email client
         webbrowser.open(f"mailto:{recipient}?subject={subject}&body={body}")
+
+    def sort_currencies(self, currencies_list:list, sort_type:str): #todo
+        if sort_type == "Ascending":
+            currencies_list.sort()
+        elif sort_type == "Descending":
+            currencies_list.sort(reverse = True)
+        elif sort_type == "Random":
+            rd_shuffle(currencies_list)
+        
+        return currencies_list
 
 class IndividualCurrencyItem(MDCard):
     def __init__(self, name:str, icon:str, text_to_show:str, release_callback):
