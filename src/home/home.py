@@ -258,7 +258,7 @@ class homeScreen(Screen):
         # Open the email client
         webbrowser.open(f"mailto:{recipient}?subject={subject}&body={body}")
 
-    def sort_currencies(self, currencies_list:list, sort_type:str): #todo
+    def sort_currencies(self, currencies_list:list, sort_type:str):
         if sort_type == "Ascending":
             currencies_list.sort()
         elif sort_type == "Descending":

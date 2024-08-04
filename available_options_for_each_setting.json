@@ -151,8 +151,7 @@
                     "Descending",
                     "Currency Value (Ascending)",
                     "Currency Value (Descending)",
-                    "Random",
-                    "Custom"
+                    "Random"
                 ],
                 "config file's setting name": "sort-type",
                 "title": "Sort by",
