@@ -33,9 +33,16 @@ class settingsScreen(MDScreen):
 
         self.add_widget(self.screen_manager)
 
+        self.create_settings()
+
     def navigate_to_setting(self, setting_section_name, setting_name = None):
         # screen name is same as section name
+        
         self.screen_manager.current = setting_section_name
+
+        if setting_section_name == "currencies to include":
+            self.currency_screen.render_pool_data()
+        
         if setting_name == None:
             return
         for setting_screen in self.screen_manager.children:
@@ -53,7 +60,8 @@ class settingsScreen(MDScreen):
         if self.settings_ready_to_use:
             return
         
-        self.screen_manager.add_widget(Currency(self.config))
+        self.currency_screen = Currency(self.config)
+        self.screen_manager.add_widget(self.currency_screen)
         self.screen_manager.add_widget(subSettingsTemplate(self.config, setting_section_name = "format numbers' looks").add_all_possible_settings()[0])
         self.screen_manager.add_widget(subSettingsTemplate(self.config, setting_section_name = "look and feel").add_all_possible_settings()[0])
         self.screen_manager.add_widget(subSettingsTemplate(self.config, setting_section_name = "sync").add_all_possible_settings()[0])
