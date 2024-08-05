@@ -121,52 +121,17 @@
                     "JPY",
                     "EUR",
                     "USD"
-                ],
-                "tab": {
-                    "id": "available currencies by default",
-                    "name": "Available Currencies"
-                }
+                ]
             },
             "currently-selected-currency": {
                 "config file's setting name": "currently-selected-currency",
                 "type": "NaN",
-                "default": "EUR",
-                "tab": {
-                    "id": "available currencies by default",
-                    "name": "Available Currencies"
-                }
+                "default": "EUR"
             },
             "currently-typed-currency-value": {
                 "config file's setting name": "currently-typed-currency-value",
                 "type": "NaN",
-                "default": "1",
-                "tab": {
-                    "id": "available currencies by default",
-                    "name": "Available Currencies"
-                }
-            },
-            "sort-type": {
-                "options": [
-                    "Ascending",
-                    "Descending",
-                    "Currency Value (Ascending)",
-                    "Currency Value (Descending)",
-                    "Random"
-                ],
-                "config file's setting name": "sort-type",
-                "title": "Sort by",
-                "alternate search strings": [
-                    "sort",
-                    "value",
-                    "currency sort"
-                ],
-                "type": "combo box",
-                "default": "Currency Value (Ascending)",
-                "tab": {
-                    "id": "currencies order",
-                    "name": "Currencies Order",
-                    "icon": "sort"
-                }
+                "default": "1"
             }
         }
     },
@@ -280,6 +245,24 @@
                 ],
                 "type": "combo box",
                 "default": "3"
+            },
+            "sort-type": {
+                "options": [
+                    "Ascending",
+                    "Descending",
+                    "Currency Value (Ascending)",
+                    "Currency Value (Descending)",
+                    "Random"
+                ],
+                "config file's setting name": "sort-type",
+                "title": "Sort by",
+                "alternate search strings": [
+                    "sort",
+                    "value",
+                    "currency sort"
+                ],
+                "type": "combo box",
+                "default": "Currency Value (Ascending)"
             },
             "special-keyboard-button-1": {
                 "options": [],

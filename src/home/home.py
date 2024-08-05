@@ -43,7 +43,7 @@ class homeScreen(Screen):
             self.currency_code_to_flag_json_data = json.load(currency_code_to_flag_json_file)
 
         currencies_to_add = ast.literal_eval(self.config["currencies to include"]["active-non-custom-currencies"])
-        currencies_to_add = self.sort_currencies(currencies_to_add, self.config["currencies to include"]["sort-type"])
+        currencies_to_add = self.sort_currencies(currencies_to_add, self.config["format numbers' looks"]["sort-type"])
         for currency in currencies_to_add:
             if currency.upper() in self.currency_code_to_flag_json_data:
                 self.__add_currency(currency, f"vendor/countries_flag/png/{self.currency_code_to_flag_json_data[currency.upper()].lower()}.png", '.')

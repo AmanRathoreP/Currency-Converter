@@ -29,6 +29,5 @@ class Currency(subSettingsTemplate):
                     check_box_type  = "boolean",
                     **kwargs
                     )
-                for tab in self.tabs_instances:
-                    if tab.id == "available currencies by default":
-                        tab.ids.sub_settings.add_widget(check_box)
+
+                self.add_element_to_settings_screen(check_box)
