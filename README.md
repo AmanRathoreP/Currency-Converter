@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>Currency Converter - v0-pre-release</h1>
+  <h1>Currency Converter - v0.1-pre-release</h1>
 </div>
 
 <p align="center">

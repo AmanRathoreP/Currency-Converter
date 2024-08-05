@@ -438,7 +438,7 @@
             "version": {
                 "config file's setting name": "",
                 "title": "version",
-                "description": "This is version v000",
+                "description": "This is version v0.1",
                 "type": "info label",
                 "subtitle": "This info is about version"
             },
